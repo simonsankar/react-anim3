@@ -16,7 +16,7 @@ class PopupCard extends Component {
     const { getAnimeDetails } = this.props;
     const { resetAnimeDetails } = this.props;
     return (
-      <Grid.Column computer={4} tablet={8} mobile={16}>
+      <Grid.Column computer={4} tablet={5} mobile={8}>
         <Popup
           basic
           content={<PopupContent />}

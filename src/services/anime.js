@@ -153,10 +153,12 @@ const Anime = {
         };
       })
       .get();
-    console.log('Genres:', genres);
     return genres;
   },
-
+  async getTopAnime() {
+    const { data } = await axios.get(`${fullURL}`);
+    const $ = cheerio.load(data);
+  },
   //Get suggestions from search
   async getSuggestions(keyword) {
     const { data } = await axios.get(`${fullURL}${ajax}${keyword}`);

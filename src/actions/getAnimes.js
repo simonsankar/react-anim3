@@ -6,23 +6,23 @@ import {
 } from './types';
 import Anime from '../services/anime';
 
-const newest = '/newest';
-const updated = '/updated';
+const newest = '/newest?page=';
+const updated = '/updated?page=';
 // All anime requests
 
 // Newest
-export const getNewestAnimes = () => {
+export const getNewestAnimes = (page = 1) => {
   console.log('Getting newest animes');
-  const request = Anime.getAnimes(newest);
+  const request = Anime.getAnimes(newest + page);
   return {
     type: GET_NEWEST_ANIMES,
     payload: request
   };
 };
 // Updated
-export const getUpdatedAnimes = () => {
+export const getUpdatedAnimes = (page = 1) => {
   console.log('Getting updated animes');
-  const request = Anime.getAnimes(updated);
+  const request = Anime.getAnimes(updated + page);
   return {
     type: GET_UPDATED_ANIMES,
     payload: request

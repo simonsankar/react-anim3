@@ -27,15 +27,15 @@ const Anime = {
         const img = $('img', el).attr('src');
 
         const status = $('div.status', a);
-        const ep = $('div.ep', status).html();
-        const dub = $('div.dub', status).html();
-        const ova = $('div.ova', status).html();
-        const ona = $('div.ona', status).html();
-        const special = $('div.special', status).html();
-        const movie = $('div.movie', status).html();
-        const preview = $('div.preview', status).html();
+        const ep = $('div.ep', status).text();
+        const dub = $('div.dub', status).text();
+        const ova = $('div.ova', status).text();
+        const ona = $('div.ona', status).text();
+        const special = $('div.special', status).text();
+        const movie = $('div.movie', status).text();
+        const preview = $('div.preview', status).text();
 
-        const title = ent.decode($('a.name', element).html());
+        const title = ent.decode($('a.name', element).text());
         return {
           title,
           url,
@@ -58,43 +58,29 @@ const Anime = {
   },
 
   async getAnimeDetails(addr) {
-    if (addr === 'ajax/film/tooltip/3509?5a4f40a1')
-      return {
-        title: 'Cursed...',
-        status: {
-          ep: null,
-          dub: 'Stupid',
-          movie: 'Movie'
-        },
-        desc:
-          "This anime movie, indonesian crap is cursed...\nI had to hard code this just to deal with its nonsense. You can still watch it of course, its link to its details is just cursed, no logical explanation. \nDoubt you'd care though.",
-        meta: null
-      };
-
     const { data } = await axios.get(`${fullURL}/${addr}`);
     const $ = cheerio.load(data);
 
-    const epi = $('div.ep').html();
-    let ep;
-    if (epi === undefined) ep = false;
-    else ep = epi;
-    const title = ent.decode($('h1').html());
-    const dub = $('div.dub').html();
-    const ova = $('div.ova').html();
-    const ona = $('div.ona').html();
-    const special = $('div.special').html();
-    const preview = $('div.preview').html();
-    const movie = $('div.movie').html();
+    const title = ent.decode($('h1').text());
 
-    const desc = ent.decode($('p.desc').html());
+    const subhead = $('div.subhead');
+    const ep = $('div.ep', subhead).text();
+    const dub = $('div.dub', subhead).text();
+    const ova = $('div.ova', subhead).text();
+    const ona = $('div.ona', subhead).text();
+    const special = $('div.special', subhead).text();
+    const preview = $('div.preview', subhead).text();
+    const movie = $('div.movie', subhead).text();
+
+    const desc = ent.decode($('p.desc').text());
 
     const meta = $('div.meta')
       .map((index, el) => {
         if (index !== 4) {
-          const label = $('label', el).html();
+          const label = $('label', el).text();
           const value = ent.decode(
             $('span', el)
-              .html()
+              .text()
               .trim()
           );
           return {
@@ -155,10 +141,7 @@ const Anime = {
       .get();
     return genres;
   },
-  async getTopAnime() {
-    const { data } = await axios.get(`${fullURL}`);
-    const $ = cheerio.load(data);
-  },
+
   //Get suggestions from search
   async getSuggestions(keyword) {
     const { data } = await axios.get(`${fullURL}${ajax}${keyword}`);

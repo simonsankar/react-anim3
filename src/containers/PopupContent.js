@@ -33,10 +33,8 @@ class PopupContent extends Component {
             <Divider hidden fitted />
             <GridRow style={status}>
               <div style={content}>
-                {animeDetails.status.ep ? (
+                {animeDetails.status.ep && (
                   <Label size="mini">{animeDetails.status.ep}</Label>
-                ) : (
-                  console.log('no ep')
                 )}
 
                 <LabelGroup size="mini" style={pullRight}>

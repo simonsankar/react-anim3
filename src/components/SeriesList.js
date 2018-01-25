@@ -5,7 +5,11 @@ const SeriesList = props => {
   const { animes } = props;
   return (
     <Grid verticalAlign="top" inverted centered>
-      {animes && animes.map(el => <PopupCard key={el.datatip} anime={el} />)}
+      {animes.length > 1 ? (
+        animes.map(el => <PopupCard key={el.datatip} anime={el} />)
+      ) : (
+        <div>Server down...</div>
+      )}
     </Grid>
   );
 };

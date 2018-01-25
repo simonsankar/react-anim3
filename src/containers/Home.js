@@ -41,7 +41,7 @@ class Home extends Component {
                 <div>
                   <SeriesList animes={animes} />
                   <Divider horizontal />
-                  <div >
+                  <div>
                     <Button animated="fade" color="teal" size="tiny">
                       <Button.Content visible>Previous</Button.Content>
                       <Button.Content hidden>

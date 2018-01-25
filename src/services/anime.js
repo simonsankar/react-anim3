@@ -117,7 +117,6 @@ const Anime = {
       desc,
       meta
     };
-    console.log('Anime response details:\n', details);
     return details;
   },
 

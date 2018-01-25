@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { fullHeight } from '../styles/column.css';
 
 class Watch extends Component {
   render() {

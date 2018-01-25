@@ -145,7 +145,59 @@ const Anime = {
   },
 
   async getEpisodesList(url) {
-    const { data } = await axios.get(url);
+    const { data } = await axios.get(`${nocors}${url}`);
+    const $ = cheerio.load(data);
+
+    const servers = $('div.servers');
+    const serversBody = $('div.widget-body', servers);
+
+    const serverList = $('div.server', serversBody)
+      // Map over servers
+      .map((index, el) => {
+        const server = $(el).attr('data-id'); // Server ID
+
+        //Check for ranges
+        const range = $('div.range', el);
+        // Ranges ? Map over : empty array
+        const ranges = $('span', range)
+          .map((index, el) => {
+            const rangeID = $(el).attr('data-range-id');
+            const rangeText = $(el).text();
+            return {
+              rangeID,
+              rangeText
+            };
+          })
+          .get();
+
+        // Map over episode list(s)
+        const episodeRanges = $('ul.episodes', el)
+          .map((index, el) => {
+            console.log('ranged #', index);
+            const episodes = $('li', el)
+              .map((index, el) => {
+                const episodeID = $('a', el).attr('data-id');
+                const episodeNum = $('a', el).text();
+                return {
+                  episodeID,
+                  episodeNum
+                };
+              })
+              .get();
+            return {
+              episodes
+            };
+          })
+          .get();
+
+        return {
+          server,
+          ranges,
+          episodeRanges
+        };
+      })
+      .get();
+    console.log(serverList);
   },
 
   //Get suggestions from search
@@ -155,5 +207,7 @@ const Anime = {
     return data;
   }
 };
+
+Anime.getEpisodesList('https://9anime.ch/watch/bleach.6j9');
 
 export default Anime;

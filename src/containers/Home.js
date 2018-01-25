@@ -16,7 +16,7 @@ import {
 } from 'semantic-ui-react';
 import SeriesList from '../components/SeriesList';
 import GenreList from '../components/GenreList';
-import AnimesMenu from '../components/AnimesMenu';
+import AnimesMenu from './AnimesMenu';
 import { fullHeight, medHeight } from '../styles/column.css';
 
 class Home extends Component {

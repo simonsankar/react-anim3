@@ -62,6 +62,7 @@ const Anime = {
     const $ = cheerio.load(data);
 
     const title = ent.decode($('h1').text());
+    const url = baseURL + $('a.watch-now').attr('href');
 
     const subhead = $('div.subhead');
     const ep = $('div.ep', subhead).text();
@@ -103,8 +104,10 @@ const Anime = {
         }
       })
       .get();
+
     const details = {
       title,
+      url,
       status: {
         ep,
         dub,
@@ -139,6 +142,10 @@ const Anime = {
       })
       .get();
     return genres;
+  },
+
+  async getEpisodesList(url) {
+    const { data } = await axios.get(url);
   },
 
   //Get suggestions from search

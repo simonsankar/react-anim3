@@ -6,6 +6,8 @@ export const RESET_ANIMES = 'RESET_ANIMES';
 export const GET_UPDATED_ANIMES = 'GET_UPDATED_ANIMES';
 export const GET_ANIME_DETAILS = 'GET_ANIME_DETAILS';
 export const RESET_ANIME_DETAILS = 'RESET_ANIME_DETAILS';
+// Selected anime
+export const SELECTED_ANIME = 'SELECTED_ANIME';
 
 // Genres
 export const GET_GENRES = 'GET_GENRES';

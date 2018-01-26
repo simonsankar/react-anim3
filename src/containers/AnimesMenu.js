@@ -12,14 +12,25 @@ import {
 import { Segment, Menu } from 'semantic-ui-react';
 
 class AnimesMenu extends Component {
-  state = { activeItem: 'updated' };
+  constructor(props) {
+    super(props);
+    this.state = { activeItem: 'updated' };
+  }
+  componentDidMount() {
+    const { activeItem } = this.state;
+    this.props.resetAnimes();
+    if (activeItem === 'updated') {
+      this.props.getUpdatedAnimes();
+    } else if (activeItem === 'newest') this.props.getNewestAnimes();
+    else this.props.getTrendingAnimes();
+  }
 
   componentDidUpdate() {
     const { activeItem } = this.state;
     this.props.resetAnimes();
-    if (activeItem === 'newest') {
-      this.props.getNewestAnimes();
-    } else if (activeItem === 'updated') this.props.getUpdatedAnimes();
+    if (activeItem === 'updated') {
+      this.props.getUpdatedAnimes();
+    } else if (activeItem === 'newest') this.props.getNewestAnimes();
     else this.props.getTrendingAnimes();
   }
   handleItemClick = (e, { name }) => {

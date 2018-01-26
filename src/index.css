@@ -4,6 +4,9 @@ body {
   color: #555 !important;
   background: rgb(238, 247, 247) !important;
 }
+h6 {
+  margin: 0 !important;
+}
 
 a:hover {
   color: #00b2a9 !important;

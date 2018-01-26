@@ -13,7 +13,6 @@ import { fullHeight, medHeight } from '../styles/column.css';
 
 class Home extends Component {
   componentWillMount() {
-    this.props.getNewestAnimes();
     this.props.getGenres();
   }
 
@@ -22,7 +21,7 @@ class Home extends Component {
     return (
       <Grid>
         <Grid.Row columns={2}>
-          <Grid.Column computer={10} tablet={10} mobile={16}>
+          <Grid.Column computer={11} tablet={10} mobile={16}>
             <AnimesMenu />
             <Segment attached="bottom" clearing style={fullHeight}>
               {!animes ? (
@@ -38,7 +37,7 @@ class Home extends Component {
             </Segment>
           </Grid.Column>
 
-          <Grid.Column computer={6} tablet={6} mobile={16}>
+          <Grid.Column computer={5} tablet={6} mobile={16}>
             <Grid.Row>
               <Grid.Column>
                 <Segment attached="top">

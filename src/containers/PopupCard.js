@@ -25,7 +25,7 @@ class PopupCard extends Component {
           onClose={() => {
             resetAnimeDetails();
           }}
-          mouseEnterDelay={600}
+          mouseEnterDelay={500}
           position="right center"
           size="small"
           style={card}
@@ -51,9 +51,9 @@ class PopupCard extends Component {
               </div>
               <Card.Content>
                 <Card.Header textAlign="center">
-                  <h5>
+                  <h6>
                     <small>{anime.title}</small>
-                  </h5>
+                  </h6>
                 </Card.Header>
                 <Card.Meta textAlign="center">
                   {anime.status.dub && (

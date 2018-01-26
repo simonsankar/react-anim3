@@ -20,7 +20,7 @@ import AnimesMenu from './AnimesMenu';
 import { fullHeight, medHeight } from '../styles/column.css';
 
 class Home extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.getNewestAnimes();
     this.props.getGenres();
   }

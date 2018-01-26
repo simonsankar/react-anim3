@@ -11,8 +11,7 @@ const animes = (state = null, action) => {
     case GET_GENRE_ANIMES:
     case GET_UPDATED_ANIMES:
       console.log('Updated animes reducer', action.payload);
-      if (action.payload) return action.payload;
-      return null;
+      return action.payload;
     case RESET_ANIMES:
       return null;
     default:

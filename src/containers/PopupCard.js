@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getAnimeDetails, resetAnimeDetails } from '../actions/getAnimeDetails';
-import { selectAnime } from '../actions/selectAnime';
 //Components
 import { Label, Card, Image, Grid, Popup } from 'semantic-ui-react';
 import PopupContent from '../containers/PopupContent';
@@ -34,13 +33,7 @@ class PopupCard extends Component {
             <Card
               className="dim"
               as={Link}
-              to={`/watch/${anime.title}`}
-              onClick={() =>
-                this.props.selectAnime({
-                  title: anime.title,
-                  url: anime.url
-                })
-              }
+              to={anime.url}
               raised
               onMouseEnter={() => {
                 this.timer = setTimeout(
@@ -105,9 +98,6 @@ class PopupCard extends Component {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    { getAnimeDetails, resetAnimeDetails, selectAnime },
-    dispatch
-  );
+  bindActionCreators({ getAnimeDetails, resetAnimeDetails }, dispatch);
 
 export default connect(null, mapDispatchToProps)(PopupCard);

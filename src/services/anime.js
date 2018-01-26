@@ -5,8 +5,8 @@ import ent from 'ent';
 const nocors = 'https://cors-anywhere.herokuapp.com/';
 const baseURL = 'https://9anime.ch';
 const fullURL = `${nocors}${baseURL}`;
-const ajax = '/ajax/film/search?sort=year%3Adesc&keyword=';
-
+const search = '/ajax/film/search?sort=year%3Adesc&keyword=';
+const episode = '/ajax/episode/info?';
 const Anime = {
   async getAnimes(endpoint) {
     // Load page data
@@ -22,7 +22,7 @@ const Anime = {
         const element = $('div.inner', el);
 
         const a = $('a.poster', element);
-        const url = a.attr('href');
+        const url = a.attr('href').slice(17); //Just the /watch/<anime>
         const datatip = a.attr('data-tip');
         const img = $('img', el).attr('src');
 
@@ -62,7 +62,7 @@ const Anime = {
     const $ = cheerio.load(data);
 
     const title = ent.decode($('h1').text());
-    const url = baseURL + $('a.watch-now').attr('href');
+    const url = $('a.watch-now').attr('href');
 
     const subhead = $('div.subhead');
     const ep = $('div.ep', subhead).text();
@@ -123,6 +123,22 @@ const Anime = {
     return details;
   },
 
+  // Get watching/current anime details
+  async getCurrentAnimeDetails(url) {
+    const { data } = await axios.get(`${fullURL}${url}`);
+    const $ = cheerio.load(data);
+
+    const title = ent.decode($('h1.title').text());
+    const alias = ent.decode($('p.alias').text());
+    const desc = ent.decode($('div.desc').text());
+
+    return {
+      title,
+      alias,
+      desc
+    };
+  },
+
   //Get genres
   async getGenres() {
     const { data } = await axios.get(`${fullURL}`);
@@ -144,8 +160,9 @@ const Anime = {
     return genres;
   },
 
+  // Get episode lists
   async getEpisodesList(url) {
-    const { data } = await axios.get(`${nocors}${url}`);
+    const { data } = await axios.get(`${fullURL}${url}`);
     const $ = cheerio.load(data);
 
     const servers = $('div.servers');
@@ -170,10 +187,9 @@ const Anime = {
           })
           .get();
 
-        // Map over episode list(s)
+        // Map over episode range(s)
         const episodeRanges = $('ul.episodes', el)
           .map((index, el) => {
-            console.log('ranged #', index);
             const episodes = $('li', el)
               .map((index, el) => {
                 const episodeID = $('a', el).attr('data-id');
@@ -197,17 +213,22 @@ const Anime = {
         };
       })
       .get();
-    console.log(serverList);
+    return serverList;
+  },
+
+  // Get video
+  async getVideo(vid, server) {
+    const query = `id=${vid}&server=${server}`;
+    const { data } = await axios.get(`${fullURL}${episode}${query}`);
+    return data.target;
   },
 
   //Get suggestions from search
   async getSuggestions(keyword) {
-    const { data } = await axios.get(`${fullURL}${ajax}${keyword}`);
+    const { data } = await axios.get(`${fullURL}${search}${keyword}`);
     console.log(data);
     return data;
   }
 };
-
-Anime.getEpisodesList('https://9anime.ch/watch/bleach.6j9');
 
 export default Anime;

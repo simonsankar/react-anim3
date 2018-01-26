@@ -1,13 +1,17 @@
 import { combineReducers } from 'redux';
 import animes from './animes_reducer';
 import animeDetails from './animeDetails_reducer';
+import currentAnimeDetails from './currentAnimeDetails';
+import currentVideo from './currentVideo_reducer';
+import episodes from './episodes_reducer';
 import genres from './genres_reducer';
-import selectedAnime from './selectedAnime_reducer';
 
 const rootReducer = combineReducers({
   animes,
   animeDetails,
-  selectedAnime,
+  currentAnimeDetails,
+  currentVideo,
+  episodes,
   genres
 });
 export default rootReducer;

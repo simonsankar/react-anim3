@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { selectAnime } from '../actions/selectAnime';
-
 import {
   GridRow,
   Button,
@@ -109,13 +106,7 @@ class PopupContent extends Component {
                 color="teal"
                 compact
                 as={Link}
-                to={`/watch/${animeDetails.title}`}
-                onClick={() =>
-                  this.props.selectAnime({
-                    title: animeDetails.title,
-                    url: animeDetails.url
-                  })
-                }
+                to={animeDetails.url}
               >
                 <Button.Content>
                   <Icon name="video play" />
@@ -130,7 +121,5 @@ class PopupContent extends Component {
 }
 
 const mapStateToProps = ({ animeDetails }) => ({ animeDetails });
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ selectAnime }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(PopupContent);
+export default connect(mapStateToProps, null)(PopupContent);

@@ -4,13 +4,19 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getEpisodes } from '../actions/getEpisodes';
-import { getCurrentAnimeDetails } from '../actions/getAnimeDetails';
+import {
+  getCurrentAnimeDetails,
+  resetCurrentAnimeDetails
+} from '../actions/getAnimeDetails';
 
 class Watch extends Component {
   componentDidMount() {
     const url = this.props.location.pathname;
     this.props.getEpisodes(url);
     this.props.getCurrentAnimeDetails(url);
+  }
+  componentWillUnmount() {
+    this.props.resetCurrentAnimeDetails();
   }
 
   render() {
@@ -50,7 +56,10 @@ const mapStateToProps = ({ episodes, currentAnimeDetails }) => ({
   currentAnimeDetails
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getEpisodes, getCurrentAnimeDetails }, dispatch);
+  bindActionCreators(
+    { getEpisodes, getCurrentAnimeDetails, resetCurrentAnimeDetails },
+    dispatch
+  );
 
 const WatchWithLocation = withRouter(Watch);
 export default connect(mapStateToProps, mapDispatchToProps)(WatchWithLocation);

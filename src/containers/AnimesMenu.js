@@ -5,20 +5,22 @@ import { connect } from 'react-redux';
 import {
   getNewestAnimes,
   getUpdatedAnimes,
+  getTrendingAnimes,
   resetAnimes
 } from '../actions/getAnimes';
 //Components
 import { Segment, Menu } from 'semantic-ui-react';
 
 class AnimesMenu extends Component {
-  state = { activeItem: 'newest' };
+  state = { activeItem: 'updated' };
 
   componentDidUpdate() {
     const { activeItem } = this.state;
     this.props.resetAnimes();
     if (activeItem === 'newest') {
       this.props.getNewestAnimes();
-    } else this.props.getUpdatedAnimes();
+    } else if (activeItem === 'updated') this.props.getUpdatedAnimes();
+    else this.props.getTrendingAnimes();
   }
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
@@ -36,16 +38,21 @@ class AnimesMenu extends Component {
           secondary
           pointing
           size="small"
-          widths={2}
+          widths={3}
         >
-          <Menu.Item
-            name="newest"
-            active={activeItem === 'newest'}
-            onClick={this.handleItemClick}
-          />
           <Menu.Item
             name="updated"
             active={activeItem === 'updated'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="trending"
+            active={activeItem === 'trending'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="newest"
+            active={activeItem === 'newest'}
             onClick={this.handleItemClick}
           />
         </Menu>
@@ -55,7 +62,7 @@ class AnimesMenu extends Component {
 }
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { getNewestAnimes, getUpdatedAnimes, resetAnimes },
+    { getNewestAnimes, getUpdatedAnimes, getTrendingAnimes, resetAnimes },
     dispatch
   );
 export default connect(null, mapDispatchToProps)(AnimesMenu);

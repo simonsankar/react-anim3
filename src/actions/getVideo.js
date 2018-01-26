@@ -1,4 +1,4 @@
-import { GET_VIDEO } from './types';
+import { GET_VIDEO, RESET_VIDEO } from './types';
 import Anime from '../services/anime';
 
 export const getVideo = (vid, server) => {
@@ -6,5 +6,11 @@ export const getVideo = (vid, server) => {
   return {
     type: GET_VIDEO,
     payload: request
+  };
+};
+
+export const resetVideo = () => {
+  return {
+    type: RESET_VIDEO
   };
 };

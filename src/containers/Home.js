@@ -5,15 +5,7 @@ import { connect } from 'react-redux';
 import { getNewestAnimes } from '../actions/getAnimes';
 import { getGenres } from '../actions/getGenres';
 //Components
-import {
-  Grid,
-  Segment,
-  Loader,
-  Dimmer,
-  Divider,
-  Icon,
-  Button
-} from 'semantic-ui-react';
+import { Grid, Segment, Loader, Dimmer, Divider } from 'semantic-ui-react';
 import SeriesList from '../components/SeriesList';
 import GenreList from '../components/GenreList';
 import AnimesMenu from './AnimesMenu';
@@ -41,25 +33,6 @@ class Home extends Component {
                 <div>
                   <SeriesList animes={animes} />
                   <Divider horizontal />
-                  <div>
-                    <Button animated="fade" color="teal" size="tiny">
-                      <Button.Content visible>Previous</Button.Content>
-                      <Button.Content hidden>
-                        <Icon name="left arrow" />
-                      </Button.Content>
-                    </Button>
-                    <Button
-                      animated="fade"
-                      color="teal"
-                      size="tiny"
-                      floated="right"
-                    >
-                      <Button.Content visible>Next</Button.Content>
-                      <Button.Content hidden>
-                        <Icon name="right arrow" />
-                      </Button.Content>
-                    </Button>
-                  </div>
                 </div>
               )}
             </Segment>

@@ -2,6 +2,7 @@ import {
   GET_UPDATED_ANIMES,
   GET_NEWEST_ANIMES,
   GET_GENRE_ANIMES,
+  GET_TRENDING_ANIMES,
   RESET_ANIMES
 } from './types';
 import Anime from '../services/anime';
@@ -25,6 +26,15 @@ export const getUpdatedAnimes = (page = 1) => {
   const request = Anime.getAnimes(updated + page);
   return {
     type: GET_UPDATED_ANIMES,
+    payload: request
+  };
+};
+//Trending Anime
+export const getTrendingAnimes = () => {
+  console.log('Getting updated animes');
+  const request = Anime.getTrendingAnimes();
+  return {
+    type: GET_TRENDING_ANIMES,
     payload: request
   };
 };

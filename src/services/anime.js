@@ -7,6 +7,7 @@ const baseURL = 'https://9anime.ch';
 const fullURL = `${nocors}${baseURL}`;
 const search = '/ajax/film/search?sort=year%3Adesc&keyword=';
 const episode = '/ajax/episode/info?';
+
 const Anime = {
   async getAnimes(endpoint) {
     // Load page data
@@ -21,6 +22,7 @@ const Anime = {
       .map((index, el) => {
         const element = $('div.inner', el);
 
+        const title = ent.decode($('a.name', element).text());
         const a = $('a.poster', element);
         const url = a.attr('href').slice(17); //Just the /watch/<anime>
         const datatip = a.attr('data-tip');
@@ -35,7 +37,6 @@ const Anime = {
         const movie = $('div.movie', status).text();
         const preview = $('div.preview', status).text();
 
-        const title = ent.decode($('a.name', element).text());
         return {
           title,
           url,
@@ -55,6 +56,58 @@ const Anime = {
       .get();
 
     return items;
+  },
+
+  // Trending anime
+  async getTrendingAnimes() {
+    const { data } = await axios.get(fullURL);
+    const $ = cheerio.load(data);
+
+    const hotnew = $('div.widget.hotnew.has-page');
+    const trending = $('div[data-name="trending"]', hotnew);
+    const pages = $('div.page', trending)
+      .map((index, el) => {
+        const list = $('div.film-list', el);
+
+        const items = $('div.item', list)
+          .map((index, el) => {
+            const element = $('div.inner', el);
+            const title = ent.decode($('a.name', element).text());
+            const a = $('a.poster', element);
+            const url = a.attr('href').slice(17); //Just the /watch/<anime>
+            const datatip = a.attr('data-tip');
+            const img = $('img', el).attr('src');
+
+            const status = $('div.status', a);
+            const ep = $('div.ep', status).text();
+            const dub = $('div.dub', status).text();
+            const ova = $('div.ova', status).text();
+            const ona = $('div.ona', status).text();
+            const special = $('div.special', status).text();
+            const movie = $('div.movie', status).text();
+            const preview = $('div.preview', status).text();
+            return {
+              title,
+              url,
+              img,
+              status: {
+                ep,
+                dub,
+                ova,
+                ona,
+                special,
+                movie,
+                preview
+              },
+              datatip
+            };
+          })
+          .get();
+        return items;
+      })
+      .get();
+    // console.log(pages);
+    return pages;
   },
 
   async getAnimeDetails(addr) {
@@ -230,5 +283,7 @@ const Anime = {
     return data;
   }
 };
+
+Anime.getTrendingAnimes();
 
 export default Anime;

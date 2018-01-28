@@ -1937,6 +1937,10 @@ dom-urls@^1.1.0:
   dependencies:
     urijs "^1.16.1"
 
+dom7@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/dom7/-/dom7-2.0.1.tgz#a8a2c802cf17c20b051d9414143061472201a233"
+
 domain-browser@^1.1.1:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.1.7.tgz#867aa4b093faa05f1de08c06f4d7b21fdf8698bc"
@@ -5105,7 +5109,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.0:
+prop-types@15.6.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -5264,6 +5268,14 @@ react-dom@^16.2.0:
 react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
+
+react-id-swiper@^1.5.8:
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/react-id-swiper/-/react-id-swiper-1.5.8.tgz#365af04dd06c776fca813364a87cc85137d9662a"
+  dependencies:
+    object-assign "^4.1.1"
+    prop-types "15.6.0"
+    swiper "4.1.0"
 
 react-redux@^5.0.6:
   version "5.0.6"
@@ -6169,6 +6181,12 @@ sw-toolbox@^3.4.0:
   dependencies:
     path-to-regexp "^1.0.1"
     serviceworker-cache-polyfill "^4.0.0"
+
+swiper@4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-4.1.0.tgz#3d1d97aef948366b8b36fa90d41dcedf5432c88c"
+  dependencies:
+    dom7 "^2.0.1"
 
 symbol-observable@^1.0.3:
   version "1.1.0"

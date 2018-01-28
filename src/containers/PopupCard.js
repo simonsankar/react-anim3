@@ -16,7 +16,7 @@ class PopupCard extends Component {
     const { getAnimeDetails } = this.props;
     const { resetAnimeDetails } = this.props;
     return (
-      <Grid.Column computer={4} tablet={5} mobile={8}>
+      <Grid.Column computer={3} tablet={5} mobile={8}>
         <Popup
           basic
           content={<PopupContent />}
@@ -34,7 +34,6 @@ class PopupCard extends Component {
               className="dim"
               as={Link}
               to={anime.url}
-              raised
               onMouseEnter={() => {
                 this.timer = setTimeout(
                   () => getAnimeDetails(anime.datatip),

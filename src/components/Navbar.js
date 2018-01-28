@@ -8,7 +8,7 @@ class Navbar extends Component {
   render() {
     return (
       <Segment.Group size="mini" style={squared}>
-        <Segment>
+        <Segment style={squared}>
           <Container>
             <Menu
               size="mini"

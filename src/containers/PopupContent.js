@@ -99,20 +99,18 @@ class PopupContent extends Component {
               </div>
             </GridRow>
             <Divider hidden />
-            <GridRow>
-              <Button
-                fluid
-                animated="fade"
-                color="teal"
-                compact
-                as={Link}
-                to={animeDetails.url}
-              >
-                <Button.Content>
-                  <Icon name="video play" />
-                </Button.Content>
-              </Button>
-            </GridRow>
+            <Button
+              fluid
+              color="teal"
+              compact
+              as={Link}
+              to={animeDetails.url}
+              icon
+              style={{ borderTopRightRadius: 0, borderTopLeftRadius: 0 }}
+            >
+              <Icon name="video play" />
+              WATCH NOW!
+            </Button>
           </div>
         )}
       </div>

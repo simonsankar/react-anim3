@@ -1,25 +1,36 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Grid, Button } from 'semantic-ui-react';
 import {
   carouselImage,
   carouselOverlay,
   carouselText
 } from '../styles/carousel.css';
-import { carouselHeight } from '../styles/column.css';
-const CarouselItem = props => {
-  const image =
-    'https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=http://2.bp.blogspot.com/-Tt7PwvWm9EU/WE-zXk6SUKI/AAAAAAABSj8/cgzxi79Pvbg/w650-h350/';
+const CarouselItem = ({ item }) => {
   return (
     <div>
-      <div style={carouselImage(image)} />
+      <div style={carouselImage(item.image)} />
       <div style={carouselOverlay}>
         <div style={carouselText}>
-          <h4>Anime Name</h4>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-            nobis eligendi voluptates saepe repudiandae, reiciendis eveniet quae
-            at omnis veniam dicta corrupti similique illo, porro, sit velit!
-            Nostrum, dolorum harum.
-          </p>
+          <Grid>
+            <Grid.Row columns={2}>
+              <Grid.Column width={10}>
+                <h4>{item.title}</h4>
+                <p>{item.desc}</p>
+              </Grid.Column>
+              <Grid.Column width={2} floated="right" verticalAlign="bottom">
+                <Button
+                  as={Link}
+                  to={item.url}
+                  color="teal"
+                  floated="right"
+                  size="tiny"
+                >
+                  Watch!
+                </Button>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </div>
       </div>
     </div>

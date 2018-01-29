@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //Redux
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getNewestAnimes } from '../actions/getAnimes';
+import { getFeaturedAnimes } from '../actions/getAnimes';
 import { getGenres } from '../actions/getGenres';
 //Components
 import {
@@ -16,23 +16,32 @@ import {
 import SeriesList from '../components/SeriesList';
 import GenreList from '../components/GenreList';
 import AnimesMenu from './AnimesMenu';
-import Carousel from './Carousel';
+import Carousel from '../components/Carousel';
 import { fullHeight, medHeight, carouselHeight } from '../styles/column.css';
 
 class Home extends Component {
   componentWillMount() {
     this.props.getGenres();
+    this.props.getFeaturedAnimes();
   }
 
   render() {
-    const { animes, genres } = this.props;
+    const { animes, genres, featuredAnimes } = this.props;
     return (
       <Grid>
         <Grid.Row columns={2}>
           {/* Main 1 */}
           <Grid.Column computer={12} tablet={10} mobile={16}>
             <Grid.Row>
-              <Carousel />
+              <Segment clearing style={carouselHeight}>
+                {!featuredAnimes ? (
+                  <Dimmer inverted active={true}>
+                    <Loader inverted />
+                  </Dimmer>
+                ) : (
+                  <Carousel items={this.props.featuredAnimes} />
+                )}
+              </Segment>
             </Grid.Row>
             <Divider horizontal />
             <Grid.Row>
@@ -100,8 +109,12 @@ class Home extends Component {
     );
   }
 }
-const mapStateToProps = ({ animes, genres }) => ({ animes, genres });
+const mapStateToProps = ({ animes, featuredAnimes, genres }) => ({
+  animes,
+  featuredAnimes,
+  genres
+});
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getNewestAnimes, getGenres }, dispatch);
+  bindActionCreators({ getFeaturedAnimes, getGenres }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

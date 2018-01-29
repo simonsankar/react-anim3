@@ -3,6 +3,7 @@ import {
   GET_NEWEST_ANIMES,
   GET_GENRE_ANIMES,
   GET_TRENDING_ANIMES,
+  GET_FEATURED_ANIMES,
   RESET_ANIMES
 } from './types';
 import Anime from '../services/anime';
@@ -38,6 +39,16 @@ export const getTrendingAnimes = () => {
     payload: request
   };
 };
+//Feature Anime
+export const getFeaturedAnimes = () => {
+  console.log('Getting featured animes');
+  const request = Anime.getFeaturedAnimes();
+  return {
+    type: GET_FEATURED_ANIMES,
+    payload: request
+  };
+};
+
 // Genre based
 export const getGenreAnimes = genre => {
   console.log('Getting genre animes');

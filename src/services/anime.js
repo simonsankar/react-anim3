@@ -192,6 +192,35 @@ const Anime = {
     };
   },
 
+  async getFeaturedAnimes() {
+    const { data } = await axios.get(`${fullURL}`);
+    const $ = cheerio.load(data);
+
+    const wrapper = $('div.items.swiper-wrapper');
+    const items = $('div.item', wrapper)
+      .map((index, el) => {
+        const image = $(el)
+          .attr('style')
+          .slice(22)
+          .slice(0, -1);
+        const info = $('div.info', el);
+        const title = $('a.name', info).text();
+        const url = $('a.name', info)
+          .attr('href')
+          .slice(17);
+        const desc = $('p', info).text();
+
+        return {
+          title,
+          desc,
+          url,
+          image
+        };
+      })
+      .get();
+    return items;
+  },
+
   //Get genres
   async getGenres() {
     const { data } = await axios.get(`${fullURL}`);
@@ -283,7 +312,5 @@ const Anime = {
     return data;
   }
 };
-
-Anime.getTrendingAnimes();
 
 export default Anime;

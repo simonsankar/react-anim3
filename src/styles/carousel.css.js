@@ -10,6 +10,7 @@ export const carouselImage = image => {
 };
 
 export const carouselOverlay = {
+  zIndex: 10,
   background:
     'linear-gradient(to top, rgba(000,000,000,1),rgba(000,000,000,0))',
   color: '#ddd',
@@ -24,5 +25,6 @@ export const carouselOverlay = {
 };
 
 export const carouselText = {
-  padding: '0.5rem'
+  padding: '1rem',
+  fontSize: '0.8rem'
 };

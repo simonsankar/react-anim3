@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Segment, Button, Icon } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 import Swiper from 'react-id-swiper';
-import CarouselItem from './CarouselItem';
+import CarouselItem from '../containers/CarouselItem';
 import { carouselHeight } from '../styles/column.css';
 
 class Carousel extends Component {
   params = {
     centeredSlides: true,
     autoplay: {
-      delay: 4500,
+      delay: 9500,
       disableOnInteraction: false
     },
     pagination: {
@@ -18,16 +18,19 @@ class Carousel extends Component {
     },
     grabCursor: true
   };
+
+  renderList({ items }) {
+    return items.map(item => {
+      return (
+        <div key={item.url}>
+          <CarouselItem item={item} />
+        </div>
+      );
+    });
+  }
+
   render() {
-    return (
-      <Segment>
-        <Swiper {...this.params}>
-          <div>
-            <CarouselItem />
-          </div>
-        </Swiper>
-      </Segment>
-    );
+    return <Swiper {...this.params}>{this.renderList(this.props)}</Swiper>;
   }
 }
 

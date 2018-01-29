@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Segment } from 'semantic-ui-react';
 import Swiper from 'react-id-swiper';
 import CarouselItem from '../containers/CarouselItem';
-import { carouselHeight } from '../styles/column.css';
 
 class Carousel extends Component {
   params = {

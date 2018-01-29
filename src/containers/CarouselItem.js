@@ -15,7 +15,7 @@ const CarouselItem = ({ item }) => {
           <Grid>
             <Grid.Row columns={2}>
               <Grid.Column width={10}>
-                <h4>{item.title}</h4>
+                <h4 style={{ color: '#eee' }}>{item.title}</h4>
                 <p>{item.desc}</p>
               </Grid.Column>
               <Grid.Column width={2} floated="right" verticalAlign="bottom">

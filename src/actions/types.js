@@ -17,3 +17,5 @@ export const GET_VIDEO = 'GET_VIDEO';
 export const RESET_VIDEO = 'RESET_VIDEO';
 // Genres
 export const GET_GENRES = 'GET_GENRES';
+//Server
+export const SET_SERVER = 'SET_SERVER';

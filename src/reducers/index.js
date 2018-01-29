@@ -6,6 +6,7 @@ import currentVideo from './currentVideo_reducer';
 import episodes from './episodes_reducer';
 import featuredAnimes from './featuredAnimes_reducer';
 import genres from './genres_reducer';
+import server from './server_reducer';
 
 const rootReducer = combineReducers({
   animes,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   currentVideo,
   episodes,
   featuredAnimes,
-  genres
+  genres,
+  server
 });
 export default rootReducer;

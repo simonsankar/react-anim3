@@ -6,7 +6,7 @@ export const medHeight = {
   minHeight: '30vh'
 };
 export const carouselHeight = {
-  minHeight: '30vh'
+  minHeight: '40vh'
 };
 export const miniCol = {
   padding: 0

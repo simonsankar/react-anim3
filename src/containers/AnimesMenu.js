@@ -35,6 +35,7 @@ class AnimesMenu extends Component {
   }
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
+    console.log(this.state.activeItem);
   };
 
   render() {

@@ -1,11 +1,12 @@
 export const carouselImage = image => {
   return {
-    minHeight: '35vh',
+    minHeight: '40vh',
     width: 'auto',
     borderRadius: '3px',
     backgroundSize: 'cover',
 
-    backgroundImage: `url(${image})`
+    backgroundImage: `url(${image})`,
+    backgroundPosition: 'center'
   };
 };
 

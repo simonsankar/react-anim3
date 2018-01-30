@@ -13,9 +13,12 @@ export const GET_CURRENT_ANIME_DETAILS = 'GET_CURRENT_ANIME_DETAILS';
 export const RESET_CURRENT_ANIME_DETAILS = 'RESET_CURRENT_ANIME_DETAILS';
 // Get episodes
 export const GET_EPISODES = 'GET_EPISODES';
+//Episode Server
+export const SET_SERVER = 'SET_SERVER';
+//Episode range
+export const SET_RANGE = 'SET_RANGE';
+//Episode video
 export const GET_VIDEO = 'GET_VIDEO';
 export const RESET_VIDEO = 'RESET_VIDEO';
 // Genres
 export const GET_GENRES = 'GET_GENRES';
-//Server
-export const SET_SERVER = 'SET_SERVER';

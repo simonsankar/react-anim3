@@ -4,6 +4,5 @@ export const miniLink = {
 };
 
 export const episodeButton = {
-  marginBottom: '0.5rem',
-  marginRight: '0.5rem'
+  margin: '0.2rem'
 };

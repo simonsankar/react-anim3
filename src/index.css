@@ -14,8 +14,8 @@ a:hover {
   color: #00b2a9 !important;
 }
 .segment {
-  border: 0 !important;
-  box-shadow: none !important;
+  /* border: 0 !important;
+  box-shadow: none !important; */
 }
 .ui.icon.input input {
   padding-right: 0;

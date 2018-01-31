@@ -17,9 +17,7 @@ class EpisodesMenu extends Component {
     const url = this.props.location.pathname;
     this.props.getEpisodes(url);
   }
-  componentDidUpdate() {}
-  handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name });
+  componentDidUpdate() {
     const { activeItem } = this.state;
     const { setServer } = this.props;
 
@@ -30,6 +28,9 @@ class EpisodesMenu extends Component {
     } else {
       setServer(2);
     }
+  }
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name });
   };
 
   render() {

@@ -39,7 +39,7 @@ export const getTrendingAnimes = () => {
     payload: request
   };
 };
-//Feature Anime
+//Featured Anime
 export const getFeaturedAnimes = () => {
   console.log('Getting featured animes');
   const request = Anime.getFeaturedAnimes();
@@ -48,7 +48,6 @@ export const getFeaturedAnimes = () => {
     payload: request
   };
 };
-
 // Genre based
 export const getGenreAnimes = genre => {
   console.log('Getting genre animes');

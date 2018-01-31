@@ -313,4 +313,5 @@ const Anime = {
   }
 };
 
+Anime.getSuggestions('ki');
 export default Anime;

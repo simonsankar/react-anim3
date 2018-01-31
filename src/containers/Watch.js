@@ -26,7 +26,9 @@ class Watch extends Component {
     return (
       <Grid>
         <Grid.Column computer={11} tablet={11} mobile={16}>
-          <Segment attached="top">{anime && <h4>{anime.title}</h4>}</Segment>
+          <Segment attached="top">
+            {anime ? <h4>{anime.title}</h4> : <h4>...</h4>}
+          </Segment>
           <Segment clearing attached="bottom" style={medHeight}>
             {!currentVideo ? (
               <Dimmer inverted active={true}>
@@ -42,7 +44,7 @@ class Watch extends Component {
               />
             )}
           </Segment>
-          <Segment clearing>
+          <Segment clearing style={medHeight}>
             {!anime ? (
               <Dimmer inverted active={true}>
                 <Loader inverted />

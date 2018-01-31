@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //Redux
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getFeaturedAnimes } from '../actions/getAnimes';
+import { getFeaturedAnimes, resetAnimes } from '../actions/getAnimes';
 import { getGenres } from '../actions/getGenres';
 //Components
 import {
@@ -23,6 +23,9 @@ class Home extends Component {
   componentWillMount() {
     this.props.getGenres();
     this.props.getFeaturedAnimes();
+  }
+  componentWillUnmount() {
+    this.props.resetAnimes();
   }
 
   render() {
@@ -68,16 +71,24 @@ class Home extends Component {
             <Grid.Row>
               <Segment attached="top">
                 <h4>Search</h4>
-                <Search size="tiny" />
+              </Segment>
+              <Segment attached="bottom">
+                <Search input={{ fluid: true }} size="tiny" />
               </Segment>
             </Grid.Row>
             <Divider horizontal />
             {/* Filter */}
             <Grid.Row>
-              <Segment attached="top" style={medHeight}>
+              <Segment attached="top">
                 <h4>Filter</h4>
               </Segment>
-              <Segment attached="bottom" />
+              <Segment attached="bottom">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Repellat natus quia numquam similique pariatur voluptates
+                perspiciatis placeat eveniet a error, mollitia temporibus
+                delectus ea alias reiciendis ratione recusandae architecto
+                deleniti?
+              </Segment>
             </Grid.Row>
             <Divider horizontal />
             {/* Genres */}
@@ -115,6 +126,6 @@ const mapStateToProps = ({ animes, featuredAnimes, genres }) => ({
   genres
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getFeaturedAnimes, getGenres }, dispatch);
+  bindActionCreators({ getFeaturedAnimes, resetAnimes, getGenres }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

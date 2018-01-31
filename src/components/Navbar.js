@@ -26,9 +26,15 @@ class Navbar extends Component {
               />
               <Menu.Item
                 as={Link}
-                to="/genres"
-                active={this.props.location.pathname === '/genres'}
-                name="genres"
+                to="/newest"
+                active={this.props.location.pathname === '/newest'}
+                name="newest"
+              />
+              <Menu.Item
+                as={Link}
+                to="/updated"
+                active={this.props.location.pathname === '/updated'}
+                name="updated"
               />
             </Menu>
           </Container>

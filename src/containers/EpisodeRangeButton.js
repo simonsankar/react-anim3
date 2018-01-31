@@ -19,7 +19,6 @@ class EpisodeRangeButton extends Component {
     console.log(range);
     return (
       <Button
-        active={epRange === range + ''}
         style={episodeButton}
         compact
         onClick={this.handleRangeClick}

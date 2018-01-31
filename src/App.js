@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { Container } from 'semantic-ui-react';
+
+import Navbar from './components/Navbar';
 import Home from './containers/Home';
+import Newest from './containers/Newest';
+import Updated from './containers/Updated';
 import Genres from './containers/Genres';
 import Watch from './containers/Watch';
-import Navbar from './components/Navbar';
-import { Container } from 'semantic-ui-react';
 
 class App extends Component {
   render() {
@@ -15,8 +18,10 @@ class App extends Component {
           <Container>
             <div>
               <Route exact path="/" component={Home} />
-              <Route path="/genres" component={Genres} />
+              <Route path="/newest" component={Newest} />
+              <Route path="/updated" component={Updated} />
               <Route path="/watch/*" component={Watch} />
+              <Route path="/genre/*" component={Genres} />
             </div>
           </Container>
         </div>

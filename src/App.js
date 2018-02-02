@@ -7,6 +7,7 @@ import Home from './containers/Home';
 import Newest from './containers/Newest';
 import Updated from './containers/Updated';
 import Genres from './containers/Genres';
+import Results from './containers/Results';
 import Watch from './containers/Watch';
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
               <Route path="/updated" component={Updated} />
               <Route path="/watch/*" component={Watch} />
               <Route path="/genre/*" component={Genres} />
+              <Route path="/search*" component={Results} />
             </div>
           </Container>
         </div>

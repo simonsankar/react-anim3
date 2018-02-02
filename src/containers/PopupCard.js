@@ -12,9 +12,7 @@ import { card, episodeTag } from '../styles/popup.css';
 class PopupCard extends Component {
   timer = null;
   render() {
-    const { anime } = this.props;
-    const { getAnimeDetails } = this.props;
-    const { resetAnimeDetails } = this.props;
+    const { anime, getAnimeDetails, resetAnimeDetails } = this.props;
     return (
       <Grid.Column computer={3} tablet={5} mobile={8}>
         <Popup

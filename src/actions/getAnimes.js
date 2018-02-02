@@ -4,12 +4,16 @@ import {
   GET_GENRE_ANIMES,
   GET_TRENDING_ANIMES,
   GET_FEATURED_ANIMES,
-  RESET_ANIMES
+  GET_SEARCHED_ANIMES,
+  RESET_ANIMES,
+  GET_SEARCH_SUGGESTIONS,
+  GET_TOTAL_PAGES
 } from './types';
 import Anime from '../services/anime';
 
 const newest = '/newest?page=';
 const updated = '/updated?page=';
+const search = '/search?&keyword=';
 // All anime requests
 
 // Newest
@@ -57,10 +61,57 @@ export const getGenreAnimes = genre => {
     payload: request
   };
 };
+// Searched based
+export const getSearchedAnimes = (path, pg = 1) => {
+  console.log('Getting Searched animes');
+  const request = Anime.getAnimes(`${path}&page=${pg}`);
+  return {
+    type: GET_SEARCHED_ANIMES,
+    payload: request
+  };
+};
 // Reset animes
 export const resetAnimes = () => {
   console.log('Resetting anime list');
   return {
     type: RESET_ANIMES
   };
+};
+
+// Search suggestions
+export const getSearchSuggestions = keyword => {
+  console.log('Getting search suggestions');
+  const request = Anime.getAnimes(search + keyword);
+  return {
+    type: GET_SEARCH_SUGGESTIONS,
+    payload: request
+  };
+};
+
+//Total pages
+
+export const getTotalPages = (type, path) => {
+  console.log('Getting Total pages for:', type);
+  switch (type) {
+    case 'NEWEST':
+      let requestNewest = Anime.getTotalPages(newest + '1');
+      return {
+        type: GET_TOTAL_PAGES,
+        payload: requestNewest
+      };
+    case 'UPDATED':
+      let requestUpdated = Anime.getTotalPages(updated + '1');
+      return {
+        type: GET_TOTAL_PAGES,
+        payload: requestUpdated
+      };
+    case 'SEARCH':
+      let requestSearched = Anime.getTotalPages(path);
+      return {
+        type: GET_TOTAL_PAGES,
+        payload: requestSearched
+      };
+    default:
+      return null;
+  }
 };

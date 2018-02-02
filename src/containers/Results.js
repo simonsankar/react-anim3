@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
-  getNewestAnimes,
+  getSearchedAnimes,
   resetAnimes,
   getTotalPages
 } from '../actions/getAnimes';
@@ -20,7 +21,7 @@ import SeriesList from '../components/SeriesList';
 import { fullHeight } from '../styles/column.css';
 import SegmentGroup from 'semantic-ui-react/dist/commonjs/elements/Segment/SegmentGroup';
 
-class Newest extends Component {
+class Results extends Component {
   constructor(props) {
     super(props);
 
@@ -29,53 +30,67 @@ class Newest extends Component {
     };
   }
   componentDidMount() {
+    const { pathname, search } = this.props.location;
     this.props.resetAnimes();
-    this.props.getNewestAnimes();
-    this.props.getTotalPages('NEWEST');
+    this.props.getSearchedAnimes(pathname + search);
+    this.props.getTotalPages('SEARCH', pathname + search);
   }
-  componentDidCatch() {
-    console.log('Dead.');
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      const { pathname, search } = this.props.location;
+      this.props.resetAnimes();
+      this.props.getSearchedAnimes(pathname + search);
+      this.props.getTotalPages('SEARCH', pathname + search);
+    }
   }
+
   handleNextClick = e => {
     const pg = this.state.page + 1;
-    console.log('next', pg);
+    const { pathname, search } = this.props.location;
+
     if (pg <= this.props.totalPages) {
       this.setState({ page: this.props.totalPages });
       this.props.resetAnimes();
-      this.props.getNewestAnimes(pg);
+      this.props.getSearchedAnimes(pathname + search, pg);
     }
   };
   handlePrevClick = e => {
     const pg = this.state.page - 1;
+    const { pathname, search } = this.props.location;
+
     if (pg >= 1) {
       this.setState({ page: pg });
       this.props.resetAnimes();
-      this.props.getNewestAnimes(pg);
+      this.props.getSearchedAnimes(pathname + search, pg);
     }
   };
 
   handleDoubleNext = e => {
     const pg = this.state.page + 100;
+    const { pathname, search } = this.props.location;
+
     if (pg <= this.props.totalPages) {
       this.setState({ page: pg });
       this.props.resetAnimes();
-      this.props.getNewestAnimes(pg);
+      this.props.getSearchedAnimes(pathname + search, pg);
     } else if (pg > this.props.totalPages) {
       this.setState({ page: this.props.totalPages });
       this.props.resetAnimes();
-      this.props.getNewestAnimes(this.props.totalPages);
+      this.props.getSearchedAnimes(pathname + search, pg);
     }
   };
   handleDoublePrev = e => {
     const pg = this.state.page - 10;
+    const { pathname, search } = this.props.location;
+
     if (pg >= 1) {
       this.setState({ page: pg });
       this.props.resetAnimes();
-      this.props.getNewestAnimes(pg);
+      this.props.getSearchedAnimes(pathname + search, pg);
     } else if (pg < 1) {
       this.setState({ page: 1 });
       this.props.resetAnimes();
-      this.props.getNewestAnimes(1);
+      this.props.getSearchedAnimes(pathname + search, 1);
     }
   };
   render() {
@@ -86,10 +101,10 @@ class Newest extends Component {
           <Grid.Column computer={12} tablet={10} mobile={16}>
             <SegmentGroup>
               <Segment color="teal">
-                <h4>Newest</h4>
+                <h4>Results</h4>
               </Segment>
-              <Segment>
-                {this.props.totalPages > 0 ? (
+              {this.props.totalPages > 0 ? (
+                <Segment>
                   <Grid padded textAlign="center" centered>
                     <Button
                       compact
@@ -135,10 +150,8 @@ class Newest extends Component {
                       <Icon name="fast forward" />
                     </Button>
                   </Grid>
-                ) : (
-                  <p>...</p>
-                )}
-              </Segment>
+                </Segment>
+              ) : null}
               <Segment clearing style={fullHeight}>
                 {!animes ? (
                   <Dimmer inverted active={true}>
@@ -164,7 +177,16 @@ class Newest extends Component {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getNewestAnimes, resetAnimes, getTotalPages }, dispatch);
-const mapStateToProps = ({ animes, totalPages }) => ({ animes, totalPages });
+  bindActionCreators(
+    { getSearchedAnimes, resetAnimes, getTotalPages },
+    dispatch
+  );
+const mapStateToProps = ({ animes, searchTerm, totalPages }) => ({
+  animes,
+  searchTerm,
+  totalPages
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Newest);
+const ResultsWithRouter = withRouter(Results);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResultsWithRouter);

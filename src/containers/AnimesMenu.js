@@ -41,7 +41,7 @@ class AnimesMenu extends Component {
   render() {
     const { activeItem } = this.state;
     return (
-      <Segment attached="top" clearing>
+      <Segment clearing color="teal">
         <Menu
           color="teal"
           compact

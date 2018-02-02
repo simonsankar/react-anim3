@@ -9,16 +9,17 @@ h6 {
   margin-bottom: 0.3rem !important;
   line-height: 1em !important;
 }
+.ui.form > .inline.fields {
+  margin: 0 0 0 !important;
+}
 
 a:hover {
   color: #00b2a9 !important;
 }
-.segment {
-  /* border: 0 !important;
-  box-shadow: none !important; */
-}
-.ui.icon.input input {
-  padding-right: 0;
+
+.ui.input input:focus,
+.ui.input.focus input {
+  border-color: #00b2a9 !important;
 }
 .dim > .overlay {
   opacity: 0;

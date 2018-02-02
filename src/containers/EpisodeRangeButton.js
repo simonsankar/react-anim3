@@ -10,7 +10,6 @@ import { setRange } from '../actions/setRange';
 class EpisodeRangeButton extends Component {
   handleRangeClick = (e, { active, rangeid }) => {
     console.log(rangeid);
-    active = !active;
     this.props.setRange(rangeid);
   };
 

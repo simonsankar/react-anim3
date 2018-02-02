@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import SearchBar from '../containers/SearchBar';
 import { Menu, Segment, Container } from 'semantic-ui-react';
 import { squared } from '../styles/navbar.css';
 
 class Navbar extends Component {
   render() {
     return (
-      <Segment.Group size="mini" style={squared}>
-        <Segment style={squared}>
+      <Segment.Group size="mini" style={squared} raised>
+        <Segment style={squared} color="teal">
           <Container>
-            <Menu
-              size="mini"
-              borderless
-              stackable
-              pointing
-              secondary
-              color="teal"
-            >
+            <Menu size="mini" secondary fluid stackable borderless>
               <Menu.Item
                 as={Link}
                 to="/"
@@ -36,10 +30,12 @@ class Navbar extends Component {
                 active={this.props.location.pathname === '/updated'}
                 name="updated"
               />
+              <Menu.Item position="right">
+                <SearchBar />
+              </Menu.Item>
             </Menu>
           </Container>
         </Segment>
-        <Segment className="navbar" inverted color="teal" style={squared} />
       </Segment.Group>
     );
   }

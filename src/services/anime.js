@@ -3,12 +3,13 @@ import cheerio from 'cheerio';
 import ent from 'ent';
 
 const nocors = 'https://cors-anywhere.herokuapp.com/';
-const baseURL = 'https://9anime.ch';
+const baseURL = 'https://9anime.is';
 const fullURL = `${nocors}${baseURL}`;
-const search = '/ajax/film/search?sort=year%3Adesc&keyword=';
 const episode = '/ajax/episode/info?';
+// const search = '/ajax/film/search?sort=year%3Adesc&keyword=';
 
 const Anime = {
+  // Dynamic, genreal purpose
   async getAnimes(endpoint) {
     // Load page data
     const { data } = await axios.get(`${fullURL}${endpoint}`);
@@ -57,7 +58,6 @@ const Anime = {
 
     return items;
   },
-
   // Trending anime
   async getTrendingAnimes() {
     const { data } = await axios.get(fullURL);
@@ -106,10 +106,97 @@ const Anime = {
         return items;
       })
       .get();
-    // console.log(pages);
     return pages;
   },
+  // Featured anime
+  async getFeaturedAnimes() {
+    const { data } = await axios.get(`${fullURL}`);
+    const $ = cheerio.load(data);
 
+    const wrapper = $('div.items.swiper-wrapper');
+    const items = $('div.item', wrapper)
+      .map((index, el) => {
+        const image = $(el)
+          .attr('style')
+          .slice(22)
+          .slice(0, -1);
+        const info = $('div.info', el);
+        const title = $('a.name', info).text();
+        const url = $('a.name', info)
+          .attr('href')
+          .slice(17);
+        const desc = $('p', info).text();
+
+        return {
+          title,
+          desc,
+          url,
+          image
+        };
+      })
+      .get();
+    return items;
+  },
+  // Top Anime (Daily)
+  async getTopAnime(period) {
+    const { data } = await axios.get(`${fullURL}`);
+    const $ = cheerio.load(data);
+
+    const ranking = $('div.widget.ranking');
+    const body = $('div.widget-body', ranking);
+    const day = $(`div.content[data-name=${period}]`, body);
+
+    const itemTop = $('div.item-top', day);
+    const aTop = $('a.thumb', itemTop);
+    const detailTop = $('div.detail', itemTop);
+    const infTop = $('div.info', detailTop);
+    const top = {
+      rank: $('i', detailTop).text(),
+      url: $(aTop)
+        .attr('href')
+        .slice(17),
+      img: $('img', aTop).attr('src'),
+      title: $('a', infTop).text()
+    };
+
+    const rest = $('div.item', day)
+      .map((index, el) => {
+        const rank = $('i', el).text();
+        const url = $('a.thumb', el)
+          .attr('href')
+          .slice(17);
+        const a = $('a.thumb', el);
+        const img = $('img', a).attr('src');
+        const datatip = a.attr('data-tip');
+        const info = $('div.info', el);
+        const title = $('a.name', info).text();
+
+        return {
+          rank,
+          url,
+          datatip,
+          title,
+          img
+        };
+      })
+      .get();
+    console.log(top, rest);
+    return {
+      top,
+      rest
+    };
+  },
+  // Total pages
+  async getTotalPages(endpoint) {
+    const { data } = await axios.get(`${fullURL}${endpoint}`);
+    const $ = cheerio.load(data);
+
+    const pageWrapper = $('div.paging-wrapper');
+    const form = $('form', pageWrapper);
+    const total = $('span.total', form).text();
+    return total;
+  },
+  // Anime details
   async getAnimeDetails(addr) {
     const { data } = await axios.get(`${fullURL}/${addr}`);
     const $ = cheerio.load(data);
@@ -190,35 +277,6 @@ const Anime = {
       alias,
       desc
     };
-  },
-
-  async getFeaturedAnimes() {
-    const { data } = await axios.get(`${fullURL}`);
-    const $ = cheerio.load(data);
-
-    const wrapper = $('div.items.swiper-wrapper');
-    const items = $('div.item', wrapper)
-      .map((index, el) => {
-        const image = $(el)
-          .attr('style')
-          .slice(22)
-          .slice(0, -1);
-        const info = $('div.info', el);
-        const title = $('a.name', info).text();
-        const url = $('a.name', info)
-          .attr('href')
-          .slice(17);
-        const desc = $('p', info).text();
-
-        return {
-          title,
-          desc,
-          url,
-          image
-        };
-      })
-      .get();
-    return items;
   },
 
   //Get genres
@@ -303,15 +361,8 @@ const Anime = {
     const query = `id=${vid}&server=${server}`;
     const { data } = await axios.get(`${fullURL}${episode}${query}`);
     return data.target;
-  },
-
-  //Get suggestions from search
-  async getSuggestions(keyword) {
-    const { data } = await axios.get(`${fullURL}${search}${keyword}`);
-    console.log(data);
-    return data;
   }
 };
 
-Anime.getSuggestions('ki');
+Anime.getTopAnime('day');
 export default Anime;

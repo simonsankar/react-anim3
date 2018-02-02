@@ -2,8 +2,9 @@ import {
   GET_UPDATED_ANIMES,
   GET_NEWEST_ANIMES,
   GET_GENRE_ANIMES,
-  RESET_ANIMES,
-  GET_TRENDING_ANIMES
+  GET_TRENDING_ANIMES,
+  GET_SEARCHED_ANIMES,
+  RESET_ANIMES
 } from '../actions/types';
 
 const animes = (state = null, action) => {
@@ -12,6 +13,7 @@ const animes = (state = null, action) => {
     case GET_GENRE_ANIMES:
     case GET_UPDATED_ANIMES:
     case GET_TRENDING_ANIMES:
+    case GET_SEARCHED_ANIMES:
       console.log('Updated animes reducer', action.payload);
       return action.payload;
     case RESET_ANIMES:

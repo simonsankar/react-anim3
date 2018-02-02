@@ -2,7 +2,7 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 import ent from 'ent';
 
-const nocors = 'http://cors-proxy.htmldriven.com/?url=';
+const nocors = 'https://cors-proxy.htmldriven.com/?url=';
 const baseURL = 'https://9anime.is';
 const fullURL = `${nocors}${baseURL}`;
 const episode = '/ajax/episode/info?';
@@ -360,7 +360,8 @@ const Anime = {
   async getVideo(vid, server) {
     const query = `id=${vid}&server=${server}`;
     const { data } = await axios.get(`${fullURL}${episode}${query}`);
-    return data.body.target;
+
+    return data.target;
   }
 };
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 import ent from 'ent';
 
-const nocors = 'https://cors-proxy.htmldriven.com/?url=';
+const nocors = 'https://secret-ocean-49799.herokuapp.com/';
 const baseURL = 'https://9anime.is';
 const fullURL = `${nocors}${baseURL}`;
 const episode = '/ajax/episode/info?';
@@ -14,7 +14,7 @@ const Anime = {
     // Load page data
     const { data } = await axios.get(`${fullURL}${endpoint}`);
     //Cheerio cursor
-    const $ = cheerio.load(data.body);
+    const $ = cheerio.load(data);
     //List containing animes
     const list = $('div.film-list');
 
@@ -61,7 +61,7 @@ const Anime = {
   // Trending anime
   async getTrendingAnimes() {
     const { data } = await axios.get(fullURL);
-    const $ = cheerio.load(data.body);
+    const $ = cheerio.load(data);
 
     const hotnew = $('div.widget.hotnew.has-page');
     const trending = $('div[data-name="trending"]', hotnew);
@@ -111,7 +111,7 @@ const Anime = {
   // Featured anime
   async getFeaturedAnimes() {
     const { data } = await axios.get(`${fullURL}`);
-    const $ = cheerio.load(data.body);
+    const $ = cheerio.load(data);
 
     const wrapper = $('div.items.swiper-wrapper');
     const items = $('div.item', wrapper)
@@ -140,7 +140,7 @@ const Anime = {
   // Top Anime (Daily)
   async getTopAnime(period) {
     const { data } = await axios.get(`${fullURL}`);
-    const $ = cheerio.load(data.body);
+    const $ = cheerio.load(data);
 
     const ranking = $('div.widget.ranking');
     const body = $('div.widget-body', ranking);
@@ -189,7 +189,7 @@ const Anime = {
   // Total pages
   async getTotalPages(endpoint) {
     const { data } = await axios.get(`${fullURL}${endpoint}`);
-    const $ = cheerio.load(data.body);
+    const $ = cheerio.load(data);
 
     const pageWrapper = $('div.paging-wrapper');
     const form = $('form', pageWrapper);
@@ -199,7 +199,7 @@ const Anime = {
   // Anime details
   async getAnimeDetails(addr) {
     const { data } = await axios.get(`${fullURL}/${addr}`);
-    const $ = cheerio.load(data.body);
+    const $ = cheerio.load(data);
 
     const title = ent.decode($('h1').text());
     const url = $('a.watch-now').attr('href');
@@ -266,7 +266,7 @@ const Anime = {
   // Get watching/current anime details
   async getCurrentAnimeDetails(url) {
     const { data } = await axios.get(`${fullURL}${url}`);
-    const $ = cheerio.load(data.body);
+    const $ = cheerio.load(data);
 
     const title = ent.decode($('h1.title').text());
     const alias = ent.decode($('p.alias').text());
@@ -282,7 +282,7 @@ const Anime = {
   //Get genres
   async getGenres() {
     const { data } = await axios.get(`${fullURL}`);
-    const $ = cheerio.load(data.body);
+    const $ = cheerio.load(data);
 
     const body = $('.genres');
     const list = $('ul', body);
@@ -303,7 +303,7 @@ const Anime = {
   // Get episode lists
   async getEpisodesList(url) {
     const { data } = await axios.get(`${fullURL}${url}`);
-    const $ = cheerio.load(data.body);
+    const $ = cheerio.load(data);
 
     const servers = $('div.servers');
     const serversBody = $('div.widget-body', servers);
@@ -360,7 +360,6 @@ const Anime = {
   async getVideo(vid, server) {
     const query = `id=${vid}&server=${server}`;
     const { data } = await axios.get(`${fullURL}${episode}${query}`);
-
     return data.target;
   }
 };

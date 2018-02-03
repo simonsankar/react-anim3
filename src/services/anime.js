@@ -2,7 +2,7 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 import ent from 'ent';
 
-const nocors = 'https://cors-kill.herokuapp.com/';
+const nocors = 'https://secret-ocean-49799.herokuapp.com/';
 const baseURL = 'https://9anime.is';
 const fullURL = `${nocors}${baseURL}`;
 const episode = '/ajax/episode/info?';

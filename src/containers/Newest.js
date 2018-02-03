@@ -40,7 +40,7 @@ class Newest extends Component {
     const pg = this.state.page + 1;
     console.log('next', pg);
     if (pg <= this.props.totalPages) {
-      this.setState({ page: this.props.totalPages });
+      this.setState({ page: pg });
       this.props.resetAnimes();
       this.props.getNewestAnimes(pg);
     }

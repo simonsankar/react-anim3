@@ -13,10 +13,7 @@ class EpisodesMenu extends Component {
     super(props);
     this.state = { activeItem: 'RapidVideo' };
   }
-  componentDidMount() {
-    const url = this.props.location.pathname;
-    this.props.getEpisodes(url);
-  }
+
   componentDidUpdate() {
     const { activeItem } = this.state;
     const { setServer } = this.props;
@@ -38,8 +35,8 @@ class EpisodesMenu extends Component {
     const { episodes } = this.props;
     const { server } = this.props;
     return (
-      <div>
-        <Segment attached="top">
+      <Segment.Group>
+        <Segment>
           <Menu
             color="teal"
             compact
@@ -67,7 +64,7 @@ class EpisodesMenu extends Component {
             />
           </Menu>
         </Segment>
-        <Segment clearing attached="bottom" style={medHeight}>
+        <Segment clearing style={medHeight}>
           {!episodes ? (
             <Dimmer inverted active={true}>
               <Loader inverted />
@@ -76,7 +73,7 @@ class EpisodesMenu extends Component {
             <EpisodeList episodes={episodes[server]} />
           )}
         </Segment>
-      </div>
+      </Segment.Group>
     );
   }
 }
@@ -86,7 +83,7 @@ const mapStateToProps = ({ episodes, server }) => ({
   server
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getEpisodes, setServer }, dispatch);
+  bindActionCreators({ setServer }, dispatch);
 const EpisodesMenuWithLocation = withRouter(EpisodesMenu);
 
 export default connect(mapStateToProps, mapDispatchToProps)(

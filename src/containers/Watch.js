@@ -7,6 +7,7 @@ import {
   getCurrentAnimeDetails,
   resetCurrentAnimeDetails
 } from '../actions/getAnimeDetails';
+import { getEpisodes } from '../actions/getEpisodes';
 
 import EpisodesMenu from './EpisodesMenu';
 import { medHeight } from '../styles/column.css';
@@ -15,9 +16,17 @@ class Watch extends Component {
   componentDidMount() {
     const url = this.props.location.pathname;
     this.props.getCurrentAnimeDetails(url);
+    this.props.getEpisodes(url);
   }
   componentWillUnmount() {
     this.props.resetCurrentAnimeDetails();
+  }
+  componentDidUpdate(prevProps) {
+    const url = this.props.location.pathname;
+    if (prevProps.location.pathname !== url) {
+      this.props.getEpisodes(url);
+      this.props.getCurrentAnimeDetails(url);
+    }
   }
 
   render() {
@@ -26,24 +35,26 @@ class Watch extends Component {
     return (
       <Grid>
         <Grid.Column computer={11} tablet={11} mobile={16}>
-          <Segment attached="top">
-            {anime ? <h4>{anime.title}</h4> : <h4>...</h4>}
-          </Segment>
-          <Segment clearing attached="bottom" style={medHeight}>
-            {!currentVideo ? (
-              <Dimmer inverted active={true}>
-                <Loader inverted />
-              </Dimmer>
-            ) : (
-              <iframe
-                title={anime ? anime.title : 'nothing'}
-                src={currentVideo}
-                frameBorder="0"
-                allowFullScreen="true"
-                style={{ height: '60vh', width: '100%' }}
-              />
-            )}
-          </Segment>
+          <Segment.Group>
+            <Segment color="teal">
+              {anime ? <h4>{anime.title}</h4> : <h4>...</h4>}
+            </Segment>
+            <Segment clearing style={medHeight}>
+              {!currentVideo ? (
+                <Dimmer inverted active={true}>
+                  <Loader inverted />
+                </Dimmer>
+              ) : (
+                <iframe
+                  title={anime ? anime.title : 'nothing'}
+                  src={currentVideo}
+                  frameBorder="0"
+                  allowFullScreen="true"
+                  style={{ height: '60vh', width: '100%' }}
+                />
+              )}
+            </Segment>
+          </Segment.Group>
           <Segment clearing style={medHeight}>
             {!anime ? (
               <Dimmer inverted active={true}>
@@ -68,7 +79,7 @@ const mapStateToProps = ({ currentAnimeDetails, currentVideo }) => ({
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { getCurrentAnimeDetails, resetCurrentAnimeDetails },
+    { getEpisodes, getCurrentAnimeDetails, resetCurrentAnimeDetails },
     dispatch
   );
 

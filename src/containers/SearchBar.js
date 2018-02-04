@@ -6,10 +6,11 @@ import { getSearchSuggestions } from '../actions/getAnimes';
 import { setSearchTerm } from '../actions/setSearchTerm';
 import { Search, Grid, Image } from 'semantic-ui-react';
 import ViewAll from './ViewAll';
+
 const customRender = ({ title, url, img }) => {
   if (img) {
     return (
-      <Grid key={url} textAlign="left">
+      <Grid key={url} textAlign="left" as={Link} to={url}>
         <Grid.Row columns={2} verticalAlign="middle">
           <Grid.Column width={5}>
             {img && <Image src={img} bordered inline size="medium" rounded />}
@@ -31,9 +32,14 @@ class SearchBar extends Component {
     this.resetComponent();
   }
 
-  resetComponent = () => this.setState({ isLoading: false });
+  resetComponent = () => {
+    this.props.setSearchTerm('');
+    this.setState({ isLoading: false });
+  };
 
-  handleResultSelect = (e, { result }) => this.resetComponent();
+  handleResultSelect = e => {
+    this.resetComponent();
+  };
 
   getResults(keyword) {
     this.props.getSearchSuggestions(keyword);

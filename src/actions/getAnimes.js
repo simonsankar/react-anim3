@@ -6,14 +6,13 @@ import {
   GET_FEATURED_ANIMES,
   GET_SEARCHED_ANIMES,
   RESET_ANIMES,
-  GET_SEARCH_SUGGESTIONS,
   GET_TOTAL_PAGES
 } from './types';
 import Anime from '../services/anime';
 
 const newest = '/newest?page=';
 const updated = '/updated?page=';
-const search = '/search?&keyword=';
+// const search = '/search?&keyword=';
 // All anime requests
 
 // Newest
@@ -75,16 +74,6 @@ export const resetAnimes = () => {
   console.log('Resetting anime list');
   return {
     type: RESET_ANIMES
-  };
-};
-
-// Search suggestions
-export const getSearchSuggestions = keyword => {
-  console.log('Getting search suggestions');
-  const request = Anime.getAnimes(search + keyword);
-  return {
-    type: GET_SEARCH_SUGGESTIONS,
-    payload: request
   };
 };
 

@@ -6,7 +6,7 @@ const nocors = 'https://secret-ocean-49799.herokuapp.com/';
 const baseURL = 'https://9anime.is';
 const fullURL = `${nocors}${baseURL}`;
 const episode = '/ajax/episode/info?';
-// const search = '/ajax/film/search?sort=year%3Adesc&keyword=';
+const search = '/ajax/film/search?sort=year%3Adesc&keyword=';
 
 const Anime = {
   // Dynamic, genreal purpose
@@ -299,6 +299,27 @@ const Anime = {
       .get();
     return genres;
   },
+  async getSuggestions(keyword) {
+    const { data } = await axios.get(`${fullURL}${search}${keyword}`);
+    const $ = cheerio.load(data.html);
+    const items = $('div.item')
+      .map((index, el) => {
+        const img = $('img.thumb', el).attr('src');
+        const info = $('div.info', el);
+        const url = $('a.name', info).attr('href');
+        const title = $('a.name', info).text();
+        const status = ent.decode($('p', info).text());
+
+        return {
+          title,
+          img,
+          status,
+          url
+        };
+      })
+      .get();
+    return items;
+  },
 
   // Get episode lists
   async getEpisodesList(url) {
@@ -364,5 +385,5 @@ const Anime = {
   }
 };
 
-Anime.getTopAnime('day');
+Anime.getSuggestions('ki');
 export default Anime;

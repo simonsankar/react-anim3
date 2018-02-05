@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getSearchSuggestions } from '../actions/getAnimes';
+import { getSearchSuggestions } from '../actions/getSearchSuggestions';
 import { setSearchTerm } from '../actions/setSearchTerm';
+import _ from 'lodash';
 import { Search, Grid, Image } from 'semantic-ui-react';
 import ViewAll from './ViewAll';
 
-const customRender = ({ title, url, img }) => {
+const customRender = ({ title, url, img, status }) => {
   if (img) {
     return (
       <Grid key={url} textAlign="left" as={Link} to={url}>
@@ -16,7 +17,8 @@ const customRender = ({ title, url, img }) => {
             {img && <Image src={img} bordered inline size="medium" rounded />}
           </Grid.Column>
           <Grid.Column floated="right" width={11}>
-            {title}
+            <p>{title}</p>
+            <small>{status}</small>
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -35,13 +37,14 @@ class SearchBar extends Component {
     this.setState({ isLoading: false });
   };
 
-  getResults(keyword) {
-    this.props.getSearchSuggestions(keyword);
-  }
+  getResults = _.debounce(value => {
+    this.props.getSearchSuggestions(value);
+  }, 450);
+
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: false });
     this.props.setSearchTerm(value);
-    setTimeout(this.getResults(value), 200);
+    this.getResults(value);
   };
 
   handleResultSelect = (e, { url }) => {

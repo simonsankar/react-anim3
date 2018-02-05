@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getVideo } from '../actions/getVideo';
-import { Grid, Divider } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import EpisodeButton from '../containers/EpisodeButton';
 import EpisodeRangeButton from '../containers/EpisodeRangeButton';
 
@@ -12,16 +12,13 @@ class EpisodeList extends React.Component {
     console.log(episodes, range);
     return (
       <div>
-        <Grid>
+        <Grid centered>
           {episodes.ranges.length !== 0 ? (
-            <div>
-              <Grid.Row>
-                {episodes.ranges.map((el, index) => {
-                  return <EpisodeRangeButton key={el.rangeID} epRange={el} />;
-                })}
-              </Grid.Row>
-              <Divider />
-            </div>
+            <Grid.Row>
+              {episodes.ranges.map((el, index) => {
+                return <EpisodeRangeButton key={el.rangeID} epRange={el} />;
+              })}
+            </Grid.Row>
           ) : null}
         </Grid>
         <Grid>

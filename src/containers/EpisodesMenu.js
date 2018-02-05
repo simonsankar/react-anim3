@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getEpisodes } from '../actions/getEpisodes';
 import { setServer } from '../actions/setServer';
 import { Segment, Menu, Dimmer, Loader } from 'semantic-ui-react';
 import EpisodeList from '../components/EpisodeList';

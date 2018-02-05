@@ -16,9 +16,7 @@ const customRender = ({ title, url, img }) => {
             {img && <Image src={img} bordered inline size="medium" rounded />}
           </Grid.Column>
           <Grid.Column floated="right" width={11}>
-            <Link color="teal" to={url}>
-              {title}
-            </Link>
+            {title}
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -37,18 +35,18 @@ class SearchBar extends Component {
     this.setState({ isLoading: false });
   };
 
-  handleResultSelect = e => {
-    this.resetComponent();
-  };
-
   getResults(keyword) {
     this.props.getSearchSuggestions(keyword);
   }
-
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: false });
     this.props.setSearchTerm(value);
     setTimeout(this.getResults(value), 200);
+  };
+
+  handleResultSelect = (e, { url }) => {
+    console.log('Selected:', url);
+    this.resetComponent();
   };
 
   render() {

@@ -14,7 +14,7 @@ class PopupCard extends Component {
   render() {
     const { anime, getAnimeDetails, resetAnimeDetails } = this.props;
     return (
-      <Grid.Column computer={3} tablet={5} mobile={8}>
+      <Grid.Column computer={3} tablet={5} mobile={8} className="fade-in">
         <Popup
           basic
           content={<PopupContent />}

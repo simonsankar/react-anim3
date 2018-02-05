@@ -49,7 +49,7 @@ class Results extends Component {
     const { pathname, search } = this.props.location;
 
     if (pg <= this.props.totalPages) {
-      this.setState({ page: this.props.totalPages });
+      this.setState({ page: pg });
       this.props.resetAnimes();
       this.props.getSearchedAnimes(pathname + search, pg);
     }
@@ -99,12 +99,12 @@ class Results extends Component {
       <Grid>
         <Grid.Row columns={2}>
           <Grid.Column computer={12} tablet={10} mobile={16}>
-            <SegmentGroup>
+            <SegmentGroup className="fade-in">
               <Segment color="teal">
                 <h4>Results</h4>
               </Segment>
               {this.props.totalPages > 0 ? (
-                <Segment>
+                <Segment className="fade-in">
                   <Grid padded textAlign="center" centered>
                     <Button
                       compact

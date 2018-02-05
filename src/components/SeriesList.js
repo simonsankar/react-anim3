@@ -1,6 +1,7 @@
 import React from 'react';
 import PopupCard from '../containers/PopupCard';
 import { Grid } from 'semantic-ui-react';
+
 const SeriesList = props => {
   const { animes } = props;
   return (

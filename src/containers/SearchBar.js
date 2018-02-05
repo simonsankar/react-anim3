@@ -11,7 +11,13 @@ import ViewAll from './ViewAll';
 const customRender = ({ title, url, img, status }) => {
   if (img) {
     return (
-      <Grid key={url} textAlign="left" as={Link} to={url}>
+      <Grid
+        key={url}
+        textAlign="left"
+        as={Link}
+        to={url}
+        className="slide-up-fade-in"
+      >
         <Grid.Row columns={2} verticalAlign="middle">
           <Grid.Column width={5}>
             {img && <Image src={img} bordered inline size="medium" rounded />}

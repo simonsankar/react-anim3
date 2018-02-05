@@ -18,7 +18,7 @@ class PopupContent extends Component {
   render() {
     const { animeDetails } = this.props;
     return (
-      <div>
+      <div className="fade-in">
         {!animeDetails ? (
           <Dimmer inverted active>
             <Loader inverted />

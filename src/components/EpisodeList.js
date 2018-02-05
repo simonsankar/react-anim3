@@ -11,7 +11,7 @@ class EpisodeList extends React.Component {
     const { episodes, range, getVideo } = this.props;
     console.log(episodes, range);
     return (
-      <div>
+      <div className="fade-in">
         <Grid centered>
           {episodes.ranges.length !== 0 ? (
             <Grid.Row>

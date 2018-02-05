@@ -14,7 +14,7 @@ import NotFoundPage from './components/NotFound';
 
 const RouteWrapper = ({ location }) => {
   const currentKey = location.pathname.split('/')[1] || '/';
-  const timeout = { enter: 500, exit: 100 };
+  const timeout = { enter: 250, exit: 100 };
 
   return (
     <div>

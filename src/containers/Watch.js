@@ -43,7 +43,7 @@ class Watch extends Component {
     return (
       <Grid>
         <Grid.Column computer={11} tablet={11} mobile={16}>
-          <Segment.Group>
+          <Segment.Group className="fade-in">
             <Segment color="teal">
               {anime ? <h4>{anime.title}</h4> : <h4>...</h4>}
             </Segment>
@@ -63,7 +63,7 @@ class Watch extends Component {
               )}
             </Segment>
           </Segment.Group>
-          <Segment clearing style={medHeight}>
+          <Segment clearing style={medHeight} className="fade-in">
             {!anime ? (
               <Dimmer inverted active={true}>
                 <Loader inverted />

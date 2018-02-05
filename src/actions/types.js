@@ -19,6 +19,7 @@ export const GET_CURRENT_ANIME_DETAILS = 'GET_CURRENT_ANIME_DETAILS';
 export const RESET_CURRENT_ANIME_DETAILS = 'RESET_CURRENT_ANIME_DETAILS';
 // Get episodes
 export const GET_EPISODES = 'GET_EPISODES';
+export const RESET_EPISODES = 'RESET_EPISODES';
 //Episode Server
 export const SET_SERVER = 'SET_SERVER';
 //Episode range

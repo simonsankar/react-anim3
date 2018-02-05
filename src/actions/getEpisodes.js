@@ -1,4 +1,4 @@
-import { GET_EPISODES } from './types';
+import { GET_EPISODES, RESET_EPISODES } from './types';
 import Anime from '../services/anime';
 
 export const getEpisodes = url => {
@@ -6,5 +6,11 @@ export const getEpisodes = url => {
   return {
     type: GET_EPISODES,
     payload: request
+  };
+};
+
+export const resestEpisodes = () => {
+  return {
+    type: RESET_EPISODES
   };
 };

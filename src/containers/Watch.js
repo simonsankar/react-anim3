@@ -7,7 +7,8 @@ import {
   getCurrentAnimeDetails,
   resetCurrentAnimeDetails
 } from '../actions/getAnimeDetails';
-import { getEpisodes } from '../actions/getEpisodes';
+import { getEpisodes, resestEpisodes } from '../actions/getEpisodes';
+import { resetVideo } from '../actions/getVideo';
 
 import EpisodesMenu from './EpisodesMenu';
 import { medHeight } from '../styles/column.css';
@@ -20,10 +21,17 @@ class Watch extends Component {
   }
   componentWillUnmount() {
     this.props.resetCurrentAnimeDetails();
+    this.props.resestEpisodes();
+    this.props.resetVideo();
   }
   componentDidUpdate(prevProps) {
     const url = this.props.location.pathname;
     if (prevProps.location.pathname !== url) {
+      // Flush old
+      this.props.resestEpisodes();
+      this.props.resetCurrentAnimeDetails();
+      this.props.resetVideo();
+      // Fetch new
       this.props.getEpisodes(url);
       this.props.getCurrentAnimeDetails(url);
     }
@@ -79,7 +87,13 @@ const mapStateToProps = ({ currentAnimeDetails, currentVideo }) => ({
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { getEpisodes, getCurrentAnimeDetails, resetCurrentAnimeDetails },
+    {
+      getEpisodes,
+      resestEpisodes,
+      getCurrentAnimeDetails,
+      resetCurrentAnimeDetails,
+      resetVideo
+    },
     dispatch
   );
 

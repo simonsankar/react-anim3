@@ -10,6 +10,7 @@ import Genres from './containers/Genres';
 import Results from './containers/Results';
 import Watch from './containers/Watch';
 // import NotFoundPage from './components/NotFound';
+import Footer from './components/Footer';
 
 const App = ({ location }) => {
   return (
@@ -28,6 +29,7 @@ const App = ({ location }) => {
         <Route path="/search*" component={Results} />
         {/* <Route component={NotFoundPage} /> */}
       </AnimatedSwitch>
+      <Footer />
     </div>
   );
 };

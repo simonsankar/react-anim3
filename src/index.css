@@ -20,6 +20,9 @@ a:hover {
   color: #00b2a9 !important;
 }
 
+.jumbotron.grid {
+  margin-top: -1rem;
+}
 .jumbotron {
   background-image: linear-gradient(
       to top right,
@@ -39,6 +42,14 @@ a:hover {
   border: 1rem solid #fff !important;
   border-top-right-radius: 2rem;
   border-bottom-left-radius: 2rem;
+}
+
+.footer {
+  position: relative;
+  bottom: 0;
+  margin-top: 10rem !important;
+  min-height: 30vh !important;
+  background-color: rgb(46, 46, 46) !important;
 }
 
 .segments > *,

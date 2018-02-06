@@ -1,15 +1,15 @@
 import React from 'react';
 import { Grid, Header } from 'semantic-ui-react';
-import { jumbotron, header } from '../styles/jumbotron.css';
+import { jumbotron } from '../styles/jumbotron.css';
 
 const Jumbrotron = () => {
   return (
     <Grid style={jumbotron} className="jumbotron ">
       <Grid.Row centered textAlign="center">
         <Grid.Column
-          computer={12}
+          computer={10}
           tablet={10}
-          mobile={16}
+          mobile={15}
           verticalAlign="middle"
           className="jumbotronHeader slide-up-fade-in"
         >

@@ -9,9 +9,9 @@ class Navbar extends Component {
   render() {
     return (
       <Segment.Group size="mini" style={squared} raised>
-        <Segment style={squared} color="teal">
+        <Segment color="teal" style={squared}>
           <Container>
-            <Menu size="mini" secondary fluid stackable borderless>
+            <Menu size="mini" borderless secondary fluid stackable>
               <Menu.Item
                 as={Link}
                 to="/"

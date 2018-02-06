@@ -53,9 +53,9 @@ class PopupCard extends Component {
               </div>
               <Card.Content>
                 <Card.Header textAlign="center">
-                  <h6>
+                  <h5>
                     <small>{anime.title}</small>
-                  </h6>
+                  </h5>
                 </Card.Header>
                 <Card.Meta textAlign="center">
                   {anime.status.dub && (

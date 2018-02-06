@@ -84,7 +84,7 @@ class Updated extends Component {
   render() {
     const { animes } = this.props;
     return (
-      <Grid>
+      <Grid container>
         <Grid.Row columns={2}>
           <Grid.Column computer={12} tablet={10} mobile={16}>
             <SegmentGroup>

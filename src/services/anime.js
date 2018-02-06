@@ -137,7 +137,7 @@ const Anime = {
       .get();
     return items;
   },
-  // Top Anime (Daily)
+  // Top Anime (Daily/Week/Monthly/) TO BE IMPLEMENTED
   async getTopAnime(period) {
     const { data } = await axios.get(`${fullURL}`);
     const $ = cheerio.load(data);
@@ -382,8 +382,8 @@ const Anime = {
     const query = `id=${vid}&server=${server}`;
     const { data } = await axios.get(`${fullURL}${episode}${query}`);
     return data.target;
-  }
+  },
+  async getFilterOptions() {}
 };
 
-Anime.getSuggestions('ki');
 export default Anime;

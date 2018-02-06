@@ -27,7 +27,7 @@ export const status = {
   backgroundColor: 'rgb(238, 247, 247)'
 };
 export const meta = {
-  fontSize: '0.7rem',
+  fontSize: '0.75rem',
   color: '#666'
 };
 export const episodeTag = {

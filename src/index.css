@@ -2,12 +2,14 @@ html {
   min-height: 100%;
 }
 body {
+  font-family: 'Play', 'sans-serif' !important;
   margin: 0 !important;
   padding: 0 !important;
   color: #666 !important;
 
-  background: linear-gradient(to top right, #eef7f7, #e2f8f8) !important;
-  background-repeat: no-repeat;
+  background-color: #eef7f7 !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
 }
 h6 {
   margin: 0 !important;
@@ -18,11 +20,31 @@ a:hover {
   color: #00b2a9 !important;
 }
 
-/* .segments > *,
+.jumbotron {
+  background-image: linear-gradient(
+      to top right,
+      rgba(0, 169, 163, 0.8),
+      rgba(10, 216, 171, 0.8)
+    ),
+    url('https://i.imgur.com/hYqqipC.jpg');
+  background-position: center;
+  background-size: cover;
+}
+.jumbotronHeader > .header {
+  font-family: 'Play', 'sans-serif' !important;
+  color: #fff !important;
+  text-transform: uppercase !important;
+  font-size: 6.5rem !important;
+  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2);
+  border: 1rem solid #fff !important;
+  border-top-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+}
+
+.segments > *,
 .segment {
-  border-radius: 0 !important;
-  border: none;
-} */
+  border: none !important;
+}
 .ui.form > .inline.fields {
   margin: 0 0 0 !important;
 }

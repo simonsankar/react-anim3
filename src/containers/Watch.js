@@ -41,7 +41,7 @@ class Watch extends Component {
     const anime = this.props.currentAnimeDetails;
     const { currentVideo } = this.props;
     return (
-      <Grid>
+      <Grid container>
         <Grid.Column computer={11} tablet={11} mobile={16}>
           <Segment.Group>
             <Segment color="teal">

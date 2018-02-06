@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import { AnimatedSwitch } from 'react-router-transition';
-import { Container } from 'semantic-ui-react';
 
 import Navbar from './components/Navbar';
 import Home from './containers/Home';
@@ -16,21 +15,19 @@ const App = ({ location }) => {
   return (
     <div>
       <Navbar />
-      <Container>
-        <AnimatedSwitch
-          atEnter={{ opacity: 0 }}
-          atLeave={{ opacity: 0 }}
-          atActive={{ opacity: 1 }}
-        >
-          <Route exact path="/" component={Home} />
-          <Route path="/newest" component={Newest} />
-          <Route path="/updated" component={Updated} />
-          <Route path="/watch/*" component={Watch} />
-          <Route path="/genre/*" component={Genres} />
-          <Route path="/search*" component={Results} />
-          {/* <Route component={NotFoundPage} /> */}
-        </AnimatedSwitch>
-      </Container>
+      <AnimatedSwitch
+        atEnter={{ opacity: 0 }}
+        atLeave={{ opacity: 0 }}
+        atActive={{ opacity: 1 }}
+      >
+        <Route exact path="/" component={Home} />
+        <Route path="/newest" component={Newest} />
+        <Route path="/updated" component={Updated} />
+        <Route path="/watch/*" component={Watch} />
+        <Route path="/genre/*" component={Genres} />
+        <Route path="/search*" component={Results} />
+        {/* <Route component={NotFoundPage} /> */}
+      </AnimatedSwitch>
     </div>
   );
 };

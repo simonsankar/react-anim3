@@ -8,7 +8,7 @@ import {
 } from '../styles/carousel.css';
 const CarouselItem = ({ item }) => {
   return (
-    <div>
+    <div className="fade-in">
       <div style={carouselImage(item.image)} />
       <div style={carouselOverlay}>
         <div style={carouselText}>

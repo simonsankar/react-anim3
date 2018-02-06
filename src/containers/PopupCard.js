@@ -23,7 +23,12 @@ class PopupCard extends Component {
           onClose={() => {
             resetAnimeDetails();
           }}
-          mouseEnterDelay={500}
+          mouseEnterDelay={720}
+          closeOnTriggerClick={true}
+          closeOnPortalMouseLeave={true}
+          closeOnTriggerMouseLeave={true}
+          closeOnDocumentClick={true}
+          closeOnRootNodeClick={true}
           position="right center"
           size="small"
           style={card}

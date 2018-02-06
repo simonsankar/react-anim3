@@ -1,8 +1,13 @@
+html {
+  min-height: 100%;
+}
 body {
   margin: 0 !important;
   padding: 0 !important;
   color: #666 !important;
-  background: #eef7f7 !important;
+
+  background: linear-gradient(to top right, #eef7f7, #e2f8f8) !important;
+  background-repeat: no-repeat;
 }
 h6 {
   margin: 0 !important;
@@ -61,26 +66,6 @@ a:hover {
 }
 
 /* Animations */
-.fade-appear,
-.fade-enter {
-  opacity: 0;
-}
-
-.fade-appear-active,
-.fade-enter-active {
-  transition: opacity 0.5s linear;
-  opacity: 1;
-}
-
-.fade-exit {
-  transition: opacity 0.5s linear;
-  opacity: 1;
-}
-
-.fade-exit-active {
-  opacity: 0;
-}
-
 /* Popups */
 .slide-up-fade-in {
   animation: slide-up-fade-in ease 1s;

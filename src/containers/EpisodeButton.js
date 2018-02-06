@@ -16,6 +16,7 @@ class EpisodeButton extends Component {
     const { episode, serverID, active } = this.props;
     return (
       <Button
+        className="fade-in"
         active={active}
         episodeid={episode.episodeID}
         serverid={serverID}

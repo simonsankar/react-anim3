@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route, withRouter, Switch } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { Route, withRouter } from 'react-router-dom';
+import { AnimatedSwitch } from 'react-router-transition';
 import { Container } from 'semantic-ui-react';
 
 import Navbar from './components/Navbar';
@@ -10,44 +10,29 @@ import Updated from './containers/Updated';
 import Genres from './containers/Genres';
 import Results from './containers/Results';
 import Watch from './containers/Watch';
-import NotFoundPage from './components/NotFound';
+// import NotFoundPage from './components/NotFound';
 
-const RouteWrapper = ({ location }) => {
-  const currentKey = location.pathname.split('/')[1] || '/';
-  const timeout = { enter: 250, exit: 100 };
-
+const App = ({ location }) => {
   return (
     <div>
       <Navbar />
       <Container>
-        <TransitionGroup>
-          <CSSTransition
-            key={currentKey}
-            timeout={timeout}
-            classNames="fade"
-            appear
-          >
-            <Switch location={location}>
-              <Route exact path="/" component={Home} />
-              <Route path="/newest" component={Newest} />
-              <Route path="/updated" component={Updated} />
-              <Route path="/watch/*" component={Watch} />
-              <Route path="/genre/*" component={Genres} />
-              <Route path="/search*" component={Results} />
-              <Route component={NotFoundPage} />
-            </Switch>
-          </CSSTransition>
-        </TransitionGroup>
+        <AnimatedSwitch
+          atEnter={{ opacity: 0 }}
+          atLeave={{ opacity: 0 }}
+          atActive={{ opacity: 1 }}
+        >
+          <Route exact path="/" component={Home} />
+          <Route path="/newest" component={Newest} />
+          <Route path="/updated" component={Updated} />
+          <Route path="/watch/*" component={Watch} />
+          <Route path="/genre/*" component={Genres} />
+          <Route path="/search*" component={Results} />
+          {/* <Route component={NotFoundPage} /> */}
+        </AnimatedSwitch>
       </Container>
     </div>
   );
 };
 
-const AppWithRouter = withRouter(RouteWrapper);
-const App = () => (
-  <BrowserRouter>
-    <AppWithRouter />
-  </BrowserRouter>
-);
-
-export default App;
+export default withRouter(App);

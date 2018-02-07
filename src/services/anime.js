@@ -191,8 +191,6 @@ const Anime = {
         };
       })
       .get();
-
-    console.log(days);
     return days;
   },
   // Total pages
@@ -438,7 +436,5 @@ const Anime = {
     return filters;
   }
 };
-
-Anime.getTopAnime();
 
 export default Anime;

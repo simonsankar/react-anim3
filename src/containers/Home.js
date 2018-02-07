@@ -11,6 +11,7 @@ import GenreList from '../components/GenreList';
 import AnimesMenu from './AnimesMenu';
 import Carousel from '../components/Carousel';
 import Jumbotron from '../components/Jumbotron';
+import TopAnime from './TopAnime';
 import { fullHeight, medHeight, carouselHeight } from '../styles/column.css';
 
 class Home extends Component {
@@ -65,22 +66,6 @@ class Home extends Component {
             <Divider />
             {/* Main 2 */}
             <Grid.Column computer={4} tablet={6} mobile={16}>
-              {/* Filter */}
-              <Grid.Row>
-                <Segment.Group>
-                  <Segment color="teal" inverted>
-                    Filter
-                  </Segment>
-                  <Segment>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Repellat natus quia numquam similique pariatur voluptates
-                    perspiciatis placeat eveniet a error, mollitia temporibus
-                    delectus ea alias reiciendis ratione recusandae architecto
-                    deleniti?
-                  </Segment>
-                </Segment.Group>
-              </Grid.Row>
-              <Divider horizontal />
               {/* Genres */}
               <Grid.Row>
                 <Segment.Group>
@@ -100,7 +85,25 @@ class Home extends Component {
               </Grid.Row>
               <Divider horizontal />
               {/* Top Anime */}
-              <Grid.Row>topanime</Grid.Row>
+              <Grid.Row>
+                <TopAnime />
+              </Grid.Row>
+              <Divider horizontal />
+              {/* Filter */}
+              <Grid.Row>
+                <Segment.Group>
+                  <Segment color="teal" inverted>
+                    Filter
+                  </Segment>
+                  <Segment>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Repellat natus quia numquam similique pariatur voluptates
+                    perspiciatis placeat eveniet a error, mollitia temporibus
+                    delectus ea alias reiciendis ratione recusandae architecto
+                    deleniti?
+                  </Segment>
+                </Segment.Group>
+              </Grid.Row>
             </Grid.Column>
           </Grid.Row>
         </Grid>

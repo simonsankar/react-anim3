@@ -16,7 +16,7 @@ class Filter extends Component {
   }
 
   render() {
-    const { filterOptions } = this.props;
+    // const { filterOptions } = this.props;
     return <div>:(</div>;
   }
 }

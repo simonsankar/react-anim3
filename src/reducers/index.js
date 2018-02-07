@@ -14,6 +14,7 @@ import genres from './genres_reducer';
 import searchTerm from './searchTerm_reducer';
 import suggestions from './suggestions_reducer';
 import topAnimes from './topAnimes_reducer';
+import period from './period_reducer';
 import totalPages from './totalPages_reducer';
 
 import quickLists from './quickLists_reducer';
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   featuredAnimes,
   filterOptions,
   genres,
+  period,
   quickLists,
   range,
   searchTerm,

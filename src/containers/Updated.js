@@ -17,8 +17,8 @@ import {
   Label
 } from 'semantic-ui-react';
 import SeriesList from '../components/SeriesList';
+import Filter from '../containers/Filter';
 import { fullHeight } from '../styles/column.css';
-import SegmentGroup from 'semantic-ui-react/dist/commonjs/elements/Segment/SegmentGroup';
 
 class Updated extends Component {
   constructor(props) {
@@ -87,7 +87,7 @@ class Updated extends Component {
       <Grid container>
         <Grid.Row columns={2}>
           <Grid.Column computer={12} tablet={10} mobile={16}>
-            <SegmentGroup>
+            <Segment.Group>
               <Segment color="teal">
                 <h4>Updated</h4>
               </Segment>
@@ -154,11 +154,13 @@ class Updated extends Component {
                   </div>
                 )}
               </Segment>
-            </SegmentGroup>
+            </Segment.Group>
           </Grid.Column>
 
           <Grid.Column computer={4} tablet={6} mobile={16}>
-            <Segment>Filter</Segment>
+            <Segment>
+              <Filter />
+            </Segment>
           </Grid.Column>
         </Grid.Row>
       </Grid>

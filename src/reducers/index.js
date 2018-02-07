@@ -9,6 +9,7 @@ import range from './range_reducer';
 import server from './server_reducer';
 
 import featuredAnimes from './featuredAnimes_reducer';
+import filterOptions from './filetOptions_reducer';
 import genres from './genres_reducer';
 import searchTerm from './searchTerm_reducer';
 import suggestions from './suggestions_reducer';
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   currentVideo,
   episodes,
   featuredAnimes,
+  filterOptions,
   genres,
   quickLists,
   range,

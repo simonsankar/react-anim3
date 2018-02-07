@@ -143,53 +143,57 @@ const Anime = {
     return items;
   },
   // Top Anime (Daily/Week/Monthly/) TO BE IMPLEMENTED
-  async getTopAnime(period) {
+  async getTopAnime() {
     const { data } = await axios.get(`${fullURL}${minimal}`);
     const $ = cheerio.load(data);
 
     const ranking = $('div.widget.ranking');
     const body = $('div.widget-body', ranking);
-    const day = $(`div.content[data-name=${period}]`, body);
+    const days = $(`div.content[data-name]`, body)
+      .map((index, day) => {
+        const itemTop = $('div.item-top', day);
+        const aTop = $('a.thumb', itemTop);
+        const detailTop = $('div.detail', itemTop);
+        const infTop = $('div.info', detailTop);
+        const top = {
+          rank: $('i', detailTop).text(),
+          url: $(aTop)
+            .attr('href')
+            .slice(17),
+          img: $('img', aTop).attr('src'),
+          title: $('a', infTop).text()
+        };
 
-    const itemTop = $('div.item-top', day);
-    const aTop = $('a.thumb', itemTop);
-    const detailTop = $('div.detail', itemTop);
-    const infTop = $('div.info', detailTop);
-    const top = {
-      rank: $('i', detailTop).text(),
-      url: $(aTop)
-        .attr('href')
-        .slice(17),
-      img: $('img', aTop).attr('src'),
-      title: $('a', infTop).text()
-    };
+        const rest = $('div.item', day)
+          .map((index, el) => {
+            const rank = $('i', el).text();
+            const url = $('a.thumb', el)
+              .attr('href')
+              .slice(17);
+            const a = $('a.thumb', el);
+            const img = $('img', a).attr('src');
+            const datatip = a.attr('data-tip');
+            const info = $('div.info', el);
+            const title = $('a.name', info).text();
 
-    const rest = $('div.item', day)
-      .map((index, el) => {
-        const rank = $('i', el).text();
-        const url = $('a.thumb', el)
-          .attr('href')
-          .slice(17);
-        const a = $('a.thumb', el);
-        const img = $('img', a).attr('src');
-        const datatip = a.attr('data-tip');
-        const info = $('div.info', el);
-        const title = $('a.name', info).text();
-
+            return {
+              rank,
+              url,
+              datatip,
+              title,
+              img
+            };
+          })
+          .get();
         return {
-          rank,
-          url,
-          datatip,
-          title,
-          img
+          top,
+          rest
         };
       })
       .get();
-    console.log(top, rest);
-    return {
-      top,
-      rest
-    };
+
+    console.log(days);
+    return days;
   },
   // Total pages
   async getTotalPages(endpoint) {
@@ -398,7 +402,43 @@ const Anime = {
     const { data } = await axios.get(`${fullURL}${episode}${query}`);
     return data.target;
   },
-  async getFilterOptions() {}
+  async getFilterOptions() {
+    const { data } = await axios.get(`${fullURL}${minimal}`);
+    const $ = cheerio.load(data);
+
+    const main = $('div#main');
+    const form = $('form.filters', main);
+
+    const filters = $('div.filter.dropdown', form)
+      .map((index, el) => {
+        const title = $('button', el)
+          .clone() //clone the element
+          .children() //select all the children
+          .remove() //remove all the children
+          .end() //again go back to selected element
+          .text()
+          .trim();
+        const items = $('li', el)
+          .map((index, el) => {
+            const text = $('label', el).text();
+            const name = $('input', el).attr('name');
+            const value = $('input', el).attr('value');
+            const key = $('input', el).attr('id');
+            return {
+              text,
+              key,
+              value,
+              name
+            };
+          })
+          .get();
+        return { title, items };
+      })
+      .get();
+    return filters;
+  }
 };
+
+Anime.getTopAnime();
 
 export default Anime;

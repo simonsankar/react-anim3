@@ -30,3 +30,5 @@ export const GET_VIDEO = 'GET_VIDEO';
 export const RESET_VIDEO = 'RESET_VIDEO';
 // Genres
 export const GET_GENRES = 'GET_GENRES';
+//Filters
+export const GET_FILTER_OPTIONS = 'GET_FILTER_OPTIONS';

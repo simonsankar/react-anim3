@@ -11,7 +11,7 @@ class Navbar extends Component {
       <Segment.Group size="mini" style={squared} raised>
         <Segment color="teal" style={squared}>
           <Container>
-            <Menu size="mini" borderless secondary fluid stackable>
+            <Menu size="small" borderless secondary fluid stackable>
               <Menu.Item
                 as={Link}
                 to="/"

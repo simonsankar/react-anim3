@@ -2,6 +2,10 @@ export const fullHeight = {
   minHeight: '75vh'
 };
 
+export const vidHeight = {
+  minHeight: '45vh'
+};
+
 export const medHeight = {
   minHeight: '30vh'
 };

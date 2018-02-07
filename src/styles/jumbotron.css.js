@@ -3,6 +3,6 @@ export const jumbotron = {
   marginLeft: '0 !important',
   marginTop: '0 !important',
   marginBottom: '1rem',
-  minHeight: '60vh',
+  minHeight: '65vh',
   boxShadow: ' 0 4px 6px 0 rgba(34,36,38,.15)'
 };

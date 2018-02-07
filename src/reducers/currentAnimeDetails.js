@@ -6,6 +6,7 @@ import {
 const currentAnimeDetails = (state = null, action) => {
   switch (action.type) {
     case GET_CURRENT_ANIME_DETAILS:
+      console.log('Current details!:', action.payload);
       return action.payload;
     case RESET_CURRENT_ANIME_DETAILS:
       return null;

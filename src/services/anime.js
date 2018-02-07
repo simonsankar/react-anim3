@@ -268,14 +268,24 @@ const Anime = {
     const { data } = await axios.get(`${fullURL}${url}`);
     const $ = cheerio.load(data);
 
-    const title = ent.decode($('h1.title').text());
-    const alias = ent.decode($('p.alias').text());
-    const desc = ent.decode($('div.desc').text());
+    const player = $('div.widget.player');
+    const title = ent.decode($('h1.title', player).text());
+    const cover = $('div.cover', player)
+      .attr('style')
+      .slice(23)
+      .slice(0, -2);
+
+    const info = $('div.widget.info');
+    const alias = ent.decode($('p.alias', info).text());
+    const desc = ent.decode($('div.desc', info).text());
+    const img = $('img', info).attr('src');
 
     return {
       title,
       alias,
-      desc
+      desc,
+      cover,
+      img
     };
   },
 

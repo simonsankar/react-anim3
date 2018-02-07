@@ -7,6 +7,7 @@ const baseURL = 'https://9anime.is';
 const fullURL = `${nocors}${baseURL}`;
 const episode = '/ajax/episode/info?';
 const search = '/ajax/film/search?sort=year%3Adesc&keyword=';
+const minimal = '/search?keyword=qw1'; // Requests a page with no animes (smaller data)
 
 const Anime = {
   // Dynamic, genreal purpose
@@ -59,54 +60,58 @@ const Anime = {
     return items;
   },
   // Trending anime
-  async getTrendingAnimes() {
+  async getQuickListsAnimes() {
     const { data } = await axios.get(fullURL);
     const $ = cheerio.load(data);
 
     const hotnew = $('div.widget.hotnew.has-page');
-    const trending = $('div[data-name="trending"]', hotnew);
-    const pages = $('div.page', trending)
+    const quickLists = $('div[data-name]', hotnew)
       .map((index, el) => {
-        const list = $('div.film-list', el);
-
-        const items = $('div.item', list)
+        const pages = $('div.page', el)
           .map((index, el) => {
-            const element = $('div.inner', el);
-            const title = ent.decode($('a.name', element).text());
-            const a = $('a.poster', element);
-            const url = a.attr('href').slice(17); //Just the /watch/<anime>
-            const datatip = a.attr('data-tip');
-            const img = $('img', el).attr('src');
+            const list = $('div.film-list', el);
 
-            const status = $('div.status', a);
-            const ep = $('div.ep', status).text();
-            const dub = $('div.dub', status).text();
-            const ova = $('div.ova', status).text();
-            const ona = $('div.ona', status).text();
-            const special = $('div.special', status).text();
-            const movie = $('div.movie', status).text();
-            const preview = $('div.preview', status).text();
-            return {
-              title,
-              url,
-              img,
-              status: {
-                ep,
-                dub,
-                ova,
-                ona,
-                special,
-                movie,
-                preview
-              },
-              datatip
-            };
+            const items = $('div.item', list)
+              .map((index, el) => {
+                const element = $('div.inner', el);
+                const title = ent.decode($('a.name', element).text());
+                const a = $('a.poster', element);
+                const url = a.attr('href').slice(17); //Just the /watch/<anime>
+                const datatip = a.attr('data-tip');
+                const img = $('img', el).attr('src');
+
+                const status = $('div.status', a);
+                const ep = $('div.ep', status).text();
+                const dub = $('div.dub', status).text();
+                const ova = $('div.ova', status).text();
+                const ona = $('div.ona', status).text();
+                const special = $('div.special', status).text();
+                const movie = $('div.movie', status).text();
+                const preview = $('div.preview', status).text();
+                return {
+                  title,
+                  url,
+                  img,
+                  status: {
+                    ep,
+                    dub,
+                    ova,
+                    ona,
+                    special,
+                    movie,
+                    preview
+                  },
+                  datatip
+                };
+              })
+              .get();
+            return items;
           })
           .get();
-        return items;
+        return { pages };
       })
       .get();
-    return pages;
+    return quickLists;
   },
   // Featured anime
   async getFeaturedAnimes() {
@@ -139,7 +144,7 @@ const Anime = {
   },
   // Top Anime (Daily/Week/Monthly/) TO BE IMPLEMENTED
   async getTopAnime(period) {
-    const { data } = await axios.get(`${fullURL}`);
+    const { data } = await axios.get(`${fullURL}${minimal}`);
     const $ = cheerio.load(data);
 
     const ranking = $('div.widget.ranking');
@@ -291,7 +296,7 @@ const Anime = {
 
   //Get genres
   async getGenres() {
-    const { data } = await axios.get(`${fullURL}`);
+    const { data } = await axios.get(`${fullURL}${minimal}`);
     const $ = cheerio.load(data);
 
     const body = $('.genres');

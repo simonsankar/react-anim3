@@ -2,11 +2,12 @@ import {
   GET_UPDATED_ANIMES,
   GET_NEWEST_ANIMES,
   GET_GENRE_ANIMES,
-  GET_TRENDING_ANIMES,
   GET_FEATURED_ANIMES,
   GET_SEARCHED_ANIMES,
   RESET_ANIMES,
-  GET_TOTAL_PAGES
+  GET_TOTAL_PAGES,
+  GET_QUICKLISTS_ANIMES,
+  SELECT_LIST
 } from './types';
 import Anime from '../services/anime';
 
@@ -33,15 +34,7 @@ export const getUpdatedAnimes = (page = 1) => {
     payload: request
   };
 };
-//Trending Anime
-export const getTrendingAnimes = () => {
-  console.log('Getting updated animes');
-  const request = Anime.getTrendingAnimes();
-  return {
-    type: GET_TRENDING_ANIMES,
-    payload: request
-  };
-};
+
 //Featured Anime
 export const getFeaturedAnimes = () => {
   console.log('Getting featured animes');
@@ -103,4 +96,22 @@ export const getTotalPages = (type, path) => {
     default:
       return null;
   }
+};
+
+//Quick LISTS Anime
+export const getQuickListsAnimes = () => {
+  console.log('Getting updated animes');
+  const request = Anime.getQuickListsAnimes();
+  return {
+    type: GET_QUICKLISTS_ANIMES,
+    payload: request
+  };
+};
+//Select a quick list
+export const selectQuickList = (choice = 0) => {
+  console.log('Selecting list:', choice);
+  return {
+    type: SELECT_LIST,
+    payload: choice
+  };
 };

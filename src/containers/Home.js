@@ -23,7 +23,7 @@ class Home extends Component {
   }
 
   render() {
-    const { animes, genres, featuredAnimes } = this.props;
+    const { quickLists, selectedList, genres, featuredAnimes } = this.props;
     return (
       <div>
         <Jumbotron />
@@ -47,13 +47,13 @@ class Home extends Component {
                 <Segment.Group>
                   <AnimesMenu />
                   <Segment clearing style={fullHeight}>
-                    {animes === null ? (
+                    {quickLists === null || selectedList === null ? (
                       <Dimmer inverted active={true}>
                         <Loader inverted />
                       </Dimmer>
                     ) : (
                       <div>
-                        <SeriesList animes={animes} />
+                        <SeriesList animes={quickLists[selectedList].pages} />
                         <Divider horizontal />
                       </div>
                     )}
@@ -108,8 +108,14 @@ class Home extends Component {
     );
   }
 }
-const mapStateToProps = ({ animes, featuredAnimes, genres }) => ({
-  animes,
+const mapStateToProps = ({
+  quickLists,
+  selectedList,
+  featuredAnimes,
+  genres
+}) => ({
+  quickLists,
+  selectedList,
   featuredAnimes,
   genres
 });

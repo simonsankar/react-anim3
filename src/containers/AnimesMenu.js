@@ -2,36 +2,32 @@ import React, { Component } from 'react';
 //Redux
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {
-  getNewestAnimes,
-  getUpdatedAnimes,
-  getTrendingAnimes,
-  resetAnimes
-} from '../actions/getAnimes';
+import { getQuickListsAnimes, selectQuickList } from '../actions/getAnimes';
 //Components
 import { Segment, Menu } from 'semantic-ui-react';
 
 class AnimesMenu extends Component {
   constructor(props) {
     super(props);
-    this.state = { activeItem: 'updated' };
+    this.state = { activeItem: 'all' };
   }
   componentDidMount() {
+    this.props.getQuickListsAnimes();
     const { activeItem } = this.state;
-    this.props.resetAnimes();
-    if (activeItem === 'updated') {
-      this.props.getUpdatedAnimes();
-    } else if (activeItem === 'newest') this.props.getNewestAnimes();
-    else this.props.getTrendingAnimes();
+    if (activeItem === 'all') {
+      this.props.selectQuickList(0);
+    } else if (activeItem === 'subbed') this.props.selectQuickList(1);
+    else if (activeItem === 'trending') this.props.selectQuickList(2);
+    else this.props.selectQuickList(3);
   }
 
   componentDidUpdate() {
     const { activeItem } = this.state;
-    this.props.resetAnimes();
-    if (activeItem === 'updated') {
-      this.props.getUpdatedAnimes();
-    } else if (activeItem === 'newest') this.props.getNewestAnimes();
-    else this.props.getTrendingAnimes();
+    if (activeItem === 'all') {
+      this.props.selectQuickList(0);
+    } else if (activeItem === 'subbed') this.props.selectQuickList(1);
+    else if (activeItem === 'trending') this.props.selectQuickList(2);
+    else this.props.selectQuickList(3);
   }
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
@@ -50,21 +46,26 @@ class AnimesMenu extends Component {
           secondary
           pointing
           size="small"
-          widths={3}
+          widths={4}
         >
           <Menu.Item
-            name="updated"
-            active={activeItem === 'updated'}
+            name="all"
+            active={activeItem === 'all'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="subbed"
+            active={activeItem === 'subbed'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="dubbed"
+            active={activeItem === 'dubbed'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             name="trending"
             active={activeItem === 'trending'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="newest"
-            active={activeItem === 'newest'}
             onClick={this.handleItemClick}
           />
         </Menu>
@@ -73,8 +74,5 @@ class AnimesMenu extends Component {
   }
 }
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    { getNewestAnimes, getUpdatedAnimes, getTrendingAnimes, resetAnimes },
-    dispatch
-  );
+  bindActionCreators({ getQuickListsAnimes, selectQuickList }, dispatch);
 export default connect(null, mapDispatchToProps)(AnimesMenu);

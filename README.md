@@ -3,6 +3,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
+## Unfinished/Problems
+- Retrieving episodes:
+  9anime (site being scraped), updated their jquery get request with 2 new queries so videos are unretrievable at this point.
+  1. 'ts=XXXXX': Timestamp on the current hour for the current time.
+  2. {underscore}=: Unknown at this point. (The problem)
+
 ## Live Demo
 https://anim3.netlify.com/
 

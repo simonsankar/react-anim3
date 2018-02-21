@@ -5,7 +5,7 @@ import ent from 'ent';
 const nocors = 'https://secret-ocean-49799.herokuapp.com/';
 const baseURL = 'https://9anime.is';
 const fullURL = `${nocors}${baseURL}`;
-const episode = '/ajax/episode/info?';
+const episode = '/ajax/episode/info?ts=1518436800&_=1471&';
 const search = '/ajax/film/search?sort=year%3Adesc&keyword=';
 const minimal = '/search?keyword=qw1'; // Requests a page with no animes (smaller data)
 
@@ -343,13 +343,13 @@ const Anime = {
     const { data } = await axios.get(`${fullURL}${url}`);
     const $ = cheerio.load(data);
 
-    const servers = $('div.servers');
+    const servers = $('div.widget.servers');
     const serversBody = $('div.widget-body', servers);
 
     const serverList = $('div.server', serversBody)
       // Map over servers
       .map((index, el) => {
-        const server = $(el).attr('data-id'); // Server ID
+        const server = $(el).attr('data-name'); // Server ID
 
         //Check for ranges
         const range = $('div.range', el);
@@ -396,7 +396,10 @@ const Anime = {
 
   // Get video
   async getVideo(vid, server) {
+    var UTCTime = new Date().getUTCSeconds();
+    console.log(UTCTime);
     const query = `id=${vid}&server=${server}`;
+    // console.log('Video req:', `${fullURL}${episode}${query}`);
     const { data } = await axios.get(`${fullURL}${episode}${query}`);
     return data.target;
   },

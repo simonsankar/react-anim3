@@ -26,7 +26,7 @@ const Anime = {
 
         const title = ent.decode($('a.name', element).text());
         const a = $('a.poster', element);
-        const url = a.attr('href').slice(17); //Just the /watch/<anime>
+        const url = a.attr('href').slice(22); //Just the /watch/<anime>
         const datatip = a.attr('data-tip');
         const img = $('img', el).attr('src');
 
@@ -76,7 +76,7 @@ const Anime = {
                 const element = $('div.inner', el);
                 const title = ent.decode($('a.name', element).text());
                 const a = $('a.poster', element);
-                const url = a.attr('href').slice(17); //Just the /watch/<anime>
+                const url = a.attr('href').slice(22); //Just the /watch/<anime>
                 const datatip = a.attr('data-tip');
                 const img = $('img', el).attr('src');
 
@@ -129,7 +129,7 @@ const Anime = {
         const title = $('a.name', info).text();
         const url = $('a.name', info)
           .attr('href')
-          .slice(17);
+          .slice(22);
         const desc = $('p', info).text();
 
         return {
@@ -159,7 +159,7 @@ const Anime = {
           rank: $('i', detailTop).text(),
           url: $(aTop)
             .attr('href')
-            .slice(17),
+            .slice(22),
           img: $('img', aTop).attr('src'),
           title: $('a', infTop).text()
         };
@@ -169,7 +169,7 @@ const Anime = {
             const rank = $('i', el).text();
             const url = $('a.thumb', el)
               .attr('href')
-              .slice(17);
+              .slice(22);
             const a = $('a.thumb', el);
             const img = $('img', a).attr('src');
             const datatip = a.attr('data-tip');

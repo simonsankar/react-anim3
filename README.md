@@ -9,9 +9,6 @@ You can find the most recent version of this guide [here](https://github.com/fac
   1. 'ts=XXXXX': Timestamp on the current hour for the current time.
   2. {underscore}=: Unknown at this point. (The problem)
 
-## Live Demo
-https://anim3.netlify.com/
-
 ## Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)
